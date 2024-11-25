@@ -4,17 +4,17 @@ package Model.Users;
  *
  * @author carlo
  */
-public class Workers {
-    private String idCard;
-    private String name;
-    private String lastName1;
-    private String lastName2;
-    private String telephone;
-    private String email;
-    private String position;
-    private String schedule;
-    private double salary;
-    private String rol;
+public class WorkersDTO {
+    private final String idCard;
+    private final String name;
+    private final String lastName1;
+    private final String lastName2;
+    private final String telephone;
+    private final String email;
+    private final String position;
+    private final String schedule;
+    private final double salary;
+    private final String rol;
 
     public String getIdCard() {
         return idCard;
@@ -56,31 +56,7 @@ public class Workers {
         return rol;
     }
 
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
-
-    public void setSchedule(String schedule) {
-        this.schedule = schedule;
-    }
-
-    public void setSalary(double salary) {
-        this.salary = salary;
-    }
-
-    public void setRol(String rol) {
-        this.rol = rol;
-    }
-
-    public Workers(String idCard, String name, String lastName1, String lastName2, String telephone, String email, String position, String schedule, double salary, String rol) {
+    public WorkersDTO(String idCard, String name, String lastName1, String lastName2, String telephone, String email, String position, String schedule, double salary, String rol) {
         this.idCard = idCard;
         this.name = name;
         this.lastName1 = lastName1;
@@ -95,7 +71,4 @@ public class Workers {
     
     
     
-    
-    
-    
-}
+} 

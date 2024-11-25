@@ -6,12 +6,13 @@ import java.time.LocalDate;
  *
  * @author carlo
  */
-public class Storerooms {
-    private int idProduccion;
-    private double idQuantity;
-    private LocalDate entryDate;
-    private LocalDate departureDate;
-    private boolean alert;
+public class StoreromsDTO {
+
+    private final int idProduccion;
+    private final double idQuantity;
+    private final LocalDate entryDate;
+    private final LocalDate departureDate;
+    private final boolean alert;
 
     public int getIdProduccion() {
         return idProduccion;
@@ -33,15 +34,7 @@ public class Storerooms {
         return alert;
     }
 
-    public void setIdQuantity(double idQuantity) {
-        this.idQuantity = idQuantity;
-    }
-
-    public void setDepartureDate(LocalDate departureDate) {
-        this.departureDate = departureDate;
-    }
-
-    public Storerooms(int idProduccion, double idQuantity, LocalDate entryDate, LocalDate departureDate, boolean alert) {
+    public StoreromsDTO(int idProduccion, double idQuantity, LocalDate entryDate, LocalDate departureDate, boolean alert) {
         this.idProduccion = idProduccion;
         this.idQuantity = idQuantity;
         this.entryDate = entryDate;
@@ -49,6 +42,5 @@ public class Storerooms {
         this.alert = alert;
     }
     
-    
-    
+
 }
