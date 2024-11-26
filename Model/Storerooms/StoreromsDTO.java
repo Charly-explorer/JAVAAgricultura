@@ -1,6 +1,6 @@
 package Model.Storerooms;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 /**
  *
@@ -10,8 +10,8 @@ public class StoreromsDTO {
 
     private final int idProduccion;
     private final double idQuantity;
-    private final LocalDate entryDate;
-    private final LocalDate departureDate;
+    private final Date entryDate;
+    private final Date departureDate;
     private final boolean alert;
 
     public int getIdProduccion() {
@@ -22,11 +22,11 @@ public class StoreromsDTO {
         return idQuantity;
     }
 
-    public LocalDate getEntryDate() {
+    public Date getEntryDate() {
         return entryDate;
     }
 
-    public LocalDate getDepartureDate() {
+    public Date getDepartureDate() {
         return departureDate;
     }
 
@@ -34,7 +34,7 @@ public class StoreromsDTO {
         return alert;
     }
 
-    public StoreromsDTO(int idProduccion, double idQuantity, LocalDate entryDate, LocalDate departureDate, boolean alert) {
+    public StoreromsDTO(int idProduccion, double idQuantity, Date entryDate, Date departureDate, boolean alert) {
         this.idProduccion = idProduccion;
         this.idQuantity = idQuantity;
         this.entryDate = entryDate;

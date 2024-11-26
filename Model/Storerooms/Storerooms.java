@@ -48,6 +48,13 @@ public class Storerooms {
         this.departureDate = departureDate;
         this.alert = alert;
     }
+      public Storerooms(int idProduccion, double idQuantity,  boolean alert) {
+        this.idProduccion = idProduccion;
+        this.idQuantity = idQuantity;
+        this.entryDate = LocalDate.now();
+        this.departureDate = null;
+        this.alert = alert;
+    }
     
     
     

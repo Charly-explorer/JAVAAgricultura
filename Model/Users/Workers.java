@@ -1,5 +1,7 @@
 package Model.Users;
 
+import java.util.regex.Pattern;
+
 /**
  *
  * @author carlo
@@ -92,10 +94,14 @@ public class Workers {
         this.salary = salary;
         this.rol = rol;
     }
-    
-    
-    
-    
-    
-    
+      public boolean validarCorreo(String email){
+       if(email==null) return false;
+       String formato="^[a-zA-Z0-9+&-]+(?:\\.[a-zA-Z0-9+&-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+       return Pattern.compile(formato).matcher(email).matches();
+    }
+      public boolean validarTelefono(String telephone){
+        if(telephone==null) return false;
+        String format= "^\\d{8}$";
+        return Pattern.compile(format).matcher(telephone).matches();
+    }
 }

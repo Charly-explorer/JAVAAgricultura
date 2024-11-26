@@ -67,5 +67,5 @@ public class Production {
         this.quatity = quatity;
         this.quality = quality;
         this.destiny = destiny;
-    }
+    } 
 }
