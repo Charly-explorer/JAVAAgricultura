@@ -1,0 +1,16 @@
+package Model.Dao;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+
+/**
+ *
+ * @author carlo
+ */
+public abstract class DaoUpdate <Dto> extends DaoBase{
+
+    public DaoUpdate(Connection connection) {
+        super(connection);
+    }
+     public abstract boolean update(Dto dto) throws SQLException;
+}
