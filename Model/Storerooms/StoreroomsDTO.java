@@ -6,7 +6,7 @@ import java.util.Date;
  *
  * @author carlo
  */
-public class StoreromsDTO {
+public class StoreroomsDTO {
 
     private final int idProduccion;
     private final double idQuantity;
@@ -27,14 +27,14 @@ public class StoreromsDTO {
     }
 
     public Date getDepartureDate() {
-        return departureDate;
+    return departureDate;
     }
 
     public boolean isAlert() {
         return alert;
     }
 
-    public StoreromsDTO(int idProduccion, double idQuantity, Date entryDate, Date departureDate, boolean alert) {
+    public StoreroomsDTO(int idProduccion, double idQuantity, Date entryDate, Date departureDate, boolean alert) {
         this.idProduccion = idProduccion;
         this.idQuantity = idQuantity;
         this.entryDate = entryDate;
