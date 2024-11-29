@@ -5,7 +5,7 @@
 package Model.Crops;
 
 import Model.State.CropState;
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *

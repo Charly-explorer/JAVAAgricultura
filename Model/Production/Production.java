@@ -11,8 +11,9 @@ public class Production {
     private int id;
     private Crop crop;
     private LocalDate date;
-    private int quatity;
+    private int amount;
     private String quality;
+    private double percentProduction;
     private String destiny;
 
     public int getId() {
@@ -27,8 +28,12 @@ public class Production {
         return date;
     }
 
-    public int getQuatity() {
-        return quatity;
+    public int getAmount() {
+        return amount;
+    }
+
+    public double getPercentProduction() {
+        return percentProduction;
     }
 
     public String getQuality() {
@@ -39,8 +44,9 @@ public class Production {
         return destiny;
     }
 
-    public void setQuatity(int quatity) {
-        this.quatity = quatity;
+    public void setAmount(int amount) {
+        this.amount = amount;
+        this.percentProduction = calculatePercentProduction();
     }
 
     public void setQuality(String quality) {
@@ -51,21 +57,26 @@ public class Production {
         this.destiny = destiny;
     }
 
-    protected Production(int id, Crop crop, LocalDate date, int quatity, String quality, String destiny) {
+    protected Production(int id, Crop crop, LocalDate date, int amount, String quality, String destiny) {
         this.id = id;
         this.crop = crop;
         this.date = date;
-        this.quatity = quatity;
+        this.amount = amount;
         this.quality = quality;
         this.destiny = destiny;
     }
     
-    public Production(int id, Crop crop, int quatity, String quality, String destiny) {
+    public Production(int id, Crop crop, int amount, String quality, String destiny) {
         this.id = id;
         this.crop = crop;
         this.date = LocalDate.now();
-        this.quatity = quatity;
+        this.amount = amount;
+        this.percentProduction = calculatePercentProduction();
         this.quality = quality;
         this.destiny = destiny;
     } 
+    
+    protected double calculatePercentProduction(){
+        return this.percentProduction = (amount/300)*100;
+    }
 }

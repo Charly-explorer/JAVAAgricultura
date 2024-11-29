@@ -5,14 +5,17 @@
 package Model.Crops;
 
 import Model.State.CropState;
+import Model.State.HarvestedCropState;
 import Model.State.SownCropState;
 import java.time.LocalDate;
+import java.lang.Exception;
 
 /**
  *
  * @author Johel M
  */
 public class Crop {
+    
     private int id;
     private String name;
     private String type;
@@ -20,47 +23,51 @@ public class Crop {
     private CropState state;
     private LocalDate sowingDate;
     private LocalDate harvestDate;
-
+    
     public int getId() {
         return id;
     }
-
+    
     public String getName() {
         return name;
     }
-
+    
     public String getType() {
         return type;
     }
-
+    
     public String getArea() {
         return area;
     }
-
+    
     public CropState getState() {
         return state;
     }
-
+    
     public LocalDate getSowingDate() {
         return sowingDate;
     }
-
+    
     public LocalDate getHarvestDate() {
         return harvestDate;
     }
-
-    public void setArea(String area) {
-        this.area = area;
-    }
-
+    
     public void setState(CropState state) {
         this.state = state;
     }
-
+    
     public void setHarvestDate(LocalDate harvestDate) {
-        this.harvestDate = harvestDate;
+        if (state instanceof HarvestedCropState) {
+            if (harvestDate != null && harvestDate.isAfter(sowingDate)) {
+                this.harvestDate = harvestDate;
+            } else {
+                throw new IllegalArgumentException("La fecha de cosecha debe ser posterior a la fecha de siembra");
+            }
+        } else {
+            throw new IllegalStateException("El cultivo no esta en estado de cosecha");
+        }
     }
-
+    
     protected Crop(int id, String name, String type, String area, CropState state, LocalDate sowingDate, LocalDate harvestDate) {
         this.id = id;
         this.name = name;
@@ -81,4 +88,7 @@ public class Crop {
         this.harvestDate = null;
     }
     
+    public Crop() {
+        this.state = new SownCropState(this);
+    }
 }

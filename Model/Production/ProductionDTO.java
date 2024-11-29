@@ -1,6 +1,6 @@
 package Model.Production;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
@@ -10,7 +10,7 @@ public class ProductionDTO {
     private final int id;
     private final int crop;
     private final Date date;
-    private final int quatity;
+    private final int amount;
     private final String quality;
     private final String destiny;
 
@@ -26,8 +26,8 @@ public class ProductionDTO {
         return date;
     }
 
-    public int getQuatity() {
-        return quatity;
+    public int getAmount() {
+        return amount;
     }
 
     public String getQuality() {
@@ -38,11 +38,11 @@ public class ProductionDTO {
         return destiny;
     }
 
-    public ProductionDTO(int id, int crop, Date date, int quatity, String quality, String destiny) {
+    public ProductionDTO(int id, int crop, Date date, int amount, String quality, String destiny) {
         this.id = id;
         this.crop = crop;
         this.date = date;
-        this.quatity = quatity;
+        this.amount = amount;
         this.quality = quality;
         this.destiny = destiny;
     }
