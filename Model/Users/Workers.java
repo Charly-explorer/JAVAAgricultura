@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
  * @author carlo
  */
 public class Workers {
-    private String idCard;
+    private  String idCard;
     private String name;
     private String lastName1;
     private String lastName2;

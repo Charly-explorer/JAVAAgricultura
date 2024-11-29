@@ -7,7 +7,7 @@ import java.sql.SQLException;
  *
  * @author carlo
  */
-public abstract class DaoUpdate <Dto> extends DaoBase{
+public abstract class DaoUpdate <Dto> extends DaoBase<Dto>{
 
     public DaoUpdate(Connection connection) {
         super(connection);

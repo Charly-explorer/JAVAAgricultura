@@ -8,7 +8,7 @@ import java.sql.SQLException;
  *
  * @author carlo
  */
-public abstract class DaoAll<Dto> extends DaoDelete{
+public abstract class DaoAll<Dto> extends DaoDelete<Dto>{
     
     public DaoAll(Connection connection) {
         super(connection);
