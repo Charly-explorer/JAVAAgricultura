@@ -6,6 +6,7 @@ package Model.Crops;
 
 import Model.Mapper.Mapper;
 import java.sql.Date;
+import java.time.LocalDate;
 
 /**
  *
@@ -22,7 +23,7 @@ public class CropMapper implements Mapper<Crop,CropDTO>{
                 ent.getArea(), 
                 ent.getState(),
                 Date.valueOf(ent.getSowingDate()), 
-                Date.valueOf(ent.getHarvestDate())
+                validateDate(ent.getHarvestDate())
         );
     }
 
@@ -37,7 +38,19 @@ public class CropMapper implements Mapper<Crop,CropDTO>{
                 dto.getArea(), 
                 dto.getState(), 
                 SowingDate.toLocalDate(), 
-                HarvestDate.toLocalDate());
+                validateDate(HarvestDate));
+    }
+    
+    public Date validateDate(LocalDate date){
+        if(date == null)
+            return null;
+        return Date.valueOf(date);
+    }
+    
+    public LocalDate validateDate(Date date){
+        if(date == null)
+            return null;
+        return date.toLocalDate();
     }
     
 }
