@@ -59,7 +59,7 @@ public class ProductionDao extends DaoBase<ProductionDTO>{
                 }
             }
         }
-        //return null;
+        return null;
     }
 
     @Override
@@ -80,7 +80,7 @@ public class ProductionDao extends DaoBase<ProductionDTO>{
                 }
             }
         }
-        //return list;
+        return list;
     }
     
 }

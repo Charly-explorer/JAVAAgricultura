@@ -22,7 +22,7 @@ import java.util.Map;
  *
  * @author Johel M
  */
-public class CropDao extends DaoAll<CropDTO>{
+public class CropDao extends DaoAll<CropDTO> {
 
     public CropDao(Connection connection) {
         super(connection);
@@ -30,22 +30,38 @@ public class CropDao extends DaoAll<CropDTO>{
 
     @Override
     public boolean update(CropDTO dto) throws SQLException {
-        
+        if (dto == null || !validatePk(dto.getId())) {
+            return false;
+        }
+        String query = "Call CropsUpdate(?,?,?)";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, convertStateToString(dto.getState()));
+            stmt.setDate(2, dto.getHarvestDate());
+            stmt.setInt(3, dto.getId());
+            return stmt.executeUpdate() > 0;
+        }
     }
 
     @Override
     public boolean delete(Object id) throws SQLException {
-        
+        if (id == null || !validatePk(id)) {
+            return false;
+        }
+        String query = "Call CropsDelete(?)";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, String.valueOf(id));
+            return stmt.executeUpdate() > 0;
+        }
     }
 
     @Override
     public boolean create(CropDTO dto) throws SQLException {
-        if(dto==null ){
+        if (dto == null) {
             return false;
         }
-        String query="Call CropsCreate(?,?,?,?,?,?)";
-        try(PreparedStatement stmt = connection.prepareStatement(query)){
-            stmt.setString(1,dto.getName());
+        String query = "Call CropsCreate(?,?,?,?,?,?)";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, dto.getName());
             stmt.setString(2, dto.getType());
             stmt.setString(3, dto.getArea());
             stmt.setString(4, convertStateToString(dto.getState()));
@@ -57,21 +73,22 @@ public class CropDao extends DaoAll<CropDTO>{
 
     @Override
     public CropDTO read(Object id) throws SQLException {
-        if(id==null || String.valueOf(id).trim().isEmpty()){
+        if (id == null || String.valueOf(id).trim().isEmpty()
+                && Integer.parseInt(String.valueOf(id)) > 0) {
             return null;
         }
-        String query="Call CropsRead(?)";
-        try(PreparedStatement stmt = connection.prepareStatement(query)){
+        String query = "Call CropsRead(?)";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, String.valueOf(id));
-            try(ResultSet rs = stmt.executeQuery()){
-                if(rs.next()){
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
                     return new CropDTO(
-                            rs.getInt(1), 
-                            rs.getString(2), 
-                            rs.getString(3), 
-                            rs.getString(4), 
-                            convertStateToClass(rs.getString(5)), 
-                            rs.getDate(6), 
+                            rs.getInt(1),
+                            rs.getString(2),
+                            rs.getString(3),
+                            rs.getString(4),
+                            convertStateToClass(rs.getString(5)),
+                            rs.getDate(6),
                             rs.getDate(7)
                     );
                 }
@@ -82,42 +99,46 @@ public class CropDao extends DaoAll<CropDTO>{
 
     @Override
     public List<CropDTO> readAll() throws SQLException {
-        String query="Call CropsReadAll()";
+        String query = "Call CropsReadAll()";
         ArrayList<CropDTO> list = new ArrayList();
-        try(PreparedStatement stmt = connection.prepareStatement(query)){
-            try(ResultSet rs = stmt.executeQuery()){
-                while(rs.next()){
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
                     list.add(new CropDTO(
-                            rs.getInt(1), 
-                            rs.getString(2), 
-                            rs.getString(3), 
-                            rs.getString(4), 
-                            convertStateToClass(rs.getString(5)), 
-                            rs.getDate(6), 
+                            rs.getInt(1),
+                            rs.getString(2),
+                            rs.getString(3),
+                            rs.getString(4),
+                            convertStateToClass(rs.getString(5)),
+                            rs.getDate(6),
                             rs.getDate(7)
-                    )) ;
+                    ));
                 }
             }
         }
         return list;
     }
-    
-    public CropState convertStateToClass(String state){
+
+    public CropState convertStateToClass(String state) {
         Crop crop = new Crop();
-        Map<String,CropState> states = Map.of(
-                "H", new HarvestedCropState(crop), 
-                "L", new LostCropState(crop), 
-                "R", new RipenningCropState(crop), 
+        Map<String, CropState> states = Map.of(
+                "H", new HarvestedCropState(crop),
+                "L", new LostCropState(crop),
+                "R", new RipenningCropState(crop),
                 "S", new SownCropState(crop));
         return states.get(state);
     }
+
+    public String convertStateToString(CropState state) {
+        Map<Class<? extends CropState>, String> states = Map.of(
+                HarvestedCropState.class, "H",
+                LostCropState.class, "L",
+                RipenningCropState.class, "R",
+                SownCropState.class, "S");
+        return states.getOrDefault(state.getClass(), "S");
+    }
     
-    public String convertStateToString(CropState state){
-        Map<Class<? extends CropState>,String> states = Map.of(
-                 HarvestedCropState.class,"H", 
-                 LostCropState.class, "L",
-                 RipenningCropState.class, "R",
-                 SownCropState.class,"S");
-        return states.getOrDefault(state.getClass(),"S");
+    public boolean validatePk(Object key) throws SQLException{
+        return read(key)==null;
     }
 }

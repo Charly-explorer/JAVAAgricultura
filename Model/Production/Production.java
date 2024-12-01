@@ -62,6 +62,7 @@ public class Production {
         this.crop = crop;
         this.date = date;
         this.amount = amount;
+        this.percentProduction = calculatePercentProduction();
         this.quality = quality;
         this.destiny = destiny;
     }
