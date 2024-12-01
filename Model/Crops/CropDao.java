@@ -56,10 +56,10 @@ public class CropDao extends DaoAll<CropDTO> {
 
     @Override
     public boolean create(CropDTO dto) throws SQLException {
-        if (dto == null) {
+        if (dto == null || !validatePk(dto.getId())) {
             return false;
         }
-        String query = "Call CropsCreate(?,?,?,?,?,?)";
+        String query = "Call CropsCreate(?,?,?,?,?,?,?)";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, dto.getName());
             stmt.setString(2, dto.getType());
@@ -67,6 +67,7 @@ public class CropDao extends DaoAll<CropDTO> {
             stmt.setString(4, convertStateToString(dto.getState()));
             stmt.setDate(5, dto.getSowingDate());
             stmt.setDate(6, dto.getHarvestDate());
+            stmt.setInt(7, dto.getId());
             return stmt.executeUpdate() > 0;
         }
     }
@@ -79,7 +80,7 @@ public class CropDao extends DaoAll<CropDTO> {
         }
         String query = "Call CropsRead(?)";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setString(1, String.valueOf(id));
+            stmt.setInt(1, Integer.parseInt(String.valueOf(id)));
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     return new CropDTO(

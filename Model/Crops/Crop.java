@@ -78,13 +78,13 @@ public class Crop {
         this.harvestDate = harvestDate;
     }
     
-    public Crop(int id, String name, String type, String area, LocalDate sowingDate) {
+    public Crop(int id, String name, String type, String area) {
         this.id = id;
         this.name = name;
         this.type = type;
         this.area = area;
         this.state = new SownCropState(this);
-        this.sowingDate = sowingDate;
+        this.sowingDate = LocalDate.now();
         this.harvestDate = null;
     }
     
