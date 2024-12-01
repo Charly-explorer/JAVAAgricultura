@@ -26,9 +26,14 @@ public class StoreroomsMapper implements Mapper<Storerooms,StoreroomsDTO> {
 
     @Override
     public Storerooms toEnt(StoreroomsDTO dto) {
+        Date EntryDate = dto.getEntryDate();
+        Date DepartureDate = dto.getDepartureDate();
+        
         return new Storerooms(
                 dto.getIdProduccion(), 
                 dto.getIdQuantity(), 
+                EntryDate.toLocalDate(),
+               DepartureDate.toLocalDate(),
                 dto.isAlert()
         );
     }
