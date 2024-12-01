@@ -1,4 +1,4 @@
-package Model.Users;
+package Model.Workers;
 
 import Model.Dao.DaoAll;
 import java.sql.Connection;
@@ -93,8 +93,7 @@ public class WorkersDao extends DaoAll<WorkersDTO> {
                             rs.getString(6),
                             rs.getString(7),
                             rs.getString(8),
-                            rs.getDouble(9),
-                            rs.getString(10));
+                            rs.getDouble(9));
 
                 }
             }
@@ -118,8 +117,7 @@ public class WorkersDao extends DaoAll<WorkersDTO> {
                      rs.getString(6),
                      rs.getString(7),
                      rs.getString(8),
-                     rs.getDouble(9),
-                     rs.getString(10)));
+                     rs.getDouble(9)));
                     
                 }
             }

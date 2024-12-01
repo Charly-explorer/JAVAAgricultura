@@ -1,4 +1,4 @@
-package Model.Users;
+package Model.Workers;
 
 import java.util.regex.Pattern;
 
@@ -16,7 +16,6 @@ public class Workers {
     private String position;
     private String schedule;
     private double salary;
-    private String rol;
 
     public String getIdCard() {
         return idCard;
@@ -54,10 +53,6 @@ public class Workers {
         return salary;
     }
 
-    public String getRol() {
-        return rol;
-    }
-
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
@@ -78,11 +73,7 @@ public class Workers {
         this.salary = salary;
     }
 
-    public void setRol(String rol) {
-        this.rol = rol;
-    }
-
-    public Workers(String idCard, String name, String lastName1, String lastName2, String telephone, String email, String position, String schedule, double salary, String rol) {
+    public Workers(String idCard, String name, String lastName1, String lastName2, String telephone, String email, String position, String schedule, double salary) {
         this.idCard = idCard;
         this.name = name;
         this.lastName1 = lastName1;
@@ -92,7 +83,6 @@ public class Workers {
         this.position = position;
         this.schedule = schedule;
         this.salary = salary;
-        this.rol = rol;
     }
       public boolean validarCorreo(String email){
        if(email==null) return false;

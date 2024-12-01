@@ -1,4 +1,4 @@
-package Model.Users;
+package Model.Workers;
 
 /**
  *
@@ -14,7 +14,6 @@ public class WorkersDTO {
     private final String position;
     private final String schedule;
     private final double salary;
-    private final String rol;
 
   
 
@@ -54,11 +53,7 @@ public class WorkersDTO {
         return salary;
     }
 
-    public String getRol() {
-        return rol;
-    }
-
-    public WorkersDTO(String idCard, String name, String lastName1, String lastName2, String telephone, String email, String position, String schedule, double salary, String rol) {
+    public WorkersDTO(String idCard, String name, String lastName1, String lastName2, String telephone, String email, String position, String schedule, double salary) {
         this.idCard = idCard;
         this.name = name;
         this.lastName1 = lastName1;
@@ -68,7 +63,6 @@ public class WorkersDTO {
         this.position = position;
         this.schedule = schedule;
         this.salary = salary;
-        this.rol = rol;
     }
     
     
