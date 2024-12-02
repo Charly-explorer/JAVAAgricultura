@@ -46,12 +46,12 @@ public class FrmMenu extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
         jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/culti64.png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/plan98.png"))); // NOI18N
         jButton2.setText("Cultivos ");
         jButton2.setBorderPainted(false);
         jButton2.setContentAreaFilled(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/cilti98.png"))); // NOI18N
+        jButton2.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/plan64.png"))); // NOI18N
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -61,42 +61,42 @@ public class FrmMenu extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/user98.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/conexion(1).png"))); // NOI18N
         jButton1.setText("Usuarios");
         jButton1.setBorderPainted(false);
         jButton1.setContentAreaFilled(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/user64.png"))); // NOI18N
+        jButton1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/conexion.png"))); // NOI18N
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         jButton3.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
         jButton3.setForeground(new java.awt.Color(0, 0, 0));
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/tra64.png"))); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/red(1).png"))); // NOI18N
         jButton3.setText("Trabajadores");
         jButton3.setBorderPainted(false);
         jButton3.setContentAreaFilled(false);
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/tra98.png"))); // NOI18N
+        jButton3.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/red.png"))); // NOI18N
         jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         jButton4.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
         jButton4.setForeground(new java.awt.Color(0, 0, 0));
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/alma98.png"))); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/granero(3).png"))); // NOI18N
         jButton4.setText("Alamacenamiento ");
         jButton4.setBorderPainted(false);
         jButton4.setContentAreaFilled(false);
         jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton4.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/alma64.png"))); // NOI18N
+        jButton4.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/granero(2).png"))); // NOI18N
         jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         jButton5.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
         jButton5.setForeground(new java.awt.Color(0, 0, 0));
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/tractor98.png"))); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/sostenible98.png"))); // NOI18N
         jButton5.setText("Producion");
         jButton5.setBorderPainted(false);
         jButton5.setContentAreaFilled(false);
         jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton5.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/tractor64.png"))); // NOI18N
+        jButton5.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/sostenible64.png"))); // NOI18N
         jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         deskTop.setLayer(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -110,37 +110,33 @@ public class FrmMenu extends javax.swing.JFrame {
         deskTopLayout.setHorizontalGroup(
             deskTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(deskTopLayout.createSequentialGroup()
-                .addContainerGap(552, Short.MAX_VALUE)
+                .addContainerGap(516, Short.MAX_VALUE)
+                .addGroup(deskTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(122, 122, 122)
                 .addGroup(deskTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addGap(74, 74, 74)
-                .addGroup(deskTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, deskTopLayout.createSequentialGroup()
-                        .addGroup(deskTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton4)
-                            .addComponent(jButton1))
-                        .addGap(57, 57, 57))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, deskTopLayout.createSequentialGroup()
-                        .addComponent(jButton5)
-                        .addGap(85, 85, 85))))
+                    .addComponent(jButton4)
+                    .addComponent(jButton5))
+                .addGap(57, 57, 57))
         );
         deskTopLayout.setVerticalGroup(
             deskTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(deskTopLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(50, 50, 50)
+                .addGap(27, 27, 27)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(jButton5)
                 .addContainerGap())
             .addGroup(deskTopLayout.createSequentialGroup()
-                .addGap(125, 125, 125)
-                .addComponent(jButton2)
-                .addGap(50, 50, 50)
+                .addGap(80, 80, 80)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(78, 78, 78))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
