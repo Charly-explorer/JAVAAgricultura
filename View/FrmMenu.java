@@ -130,7 +130,7 @@ public class FrmMenu extends javax.swing.JFrame {
             .addGroup(deskTopLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(50, 50, 50)
                 .addComponent(jButton5)
