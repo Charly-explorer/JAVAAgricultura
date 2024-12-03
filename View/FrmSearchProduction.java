@@ -4,20 +4,64 @@
  */
 package View;
 
+import Model.Production.Production;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+
 /**
  *
  * @author zulay
  */
 public class FrmSearchProduction extends javax.swing.JDialog {
-
+    List<Production> list;
+    private IView frmProduction;
+    private DefaultTableModel tableModel;
+    TableRowSorter<TableModel> sorter;
     /**
      * Creates new form FrmSearchProduction
      */
     public FrmSearchProduction(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        tableModel = (DefaultTableModel) tblProduction.getModel();
+        sorter = new TableRowSorter<>(this.tblProduction.getModel());
+        tblProduction.setRowSorter(sorter);
     }
 
+    public void setFrmProduction(IView frmProduction) {
+        this.frmProduction = frmProduction;
+    }
+
+    public void setList(List<Production> list) {
+        this.list = list;
+        if (list == null || tableModel == null) return;
+        tableModel.setNumRows(0);
+        
+        list.forEach(production -> tableModel.addRow(
+                new Object[]{
+                    production.getId(),
+                    production.getCrop().getName(),
+                    formatDate(production.getDate()),
+                    production.getAmount(),
+                    production.getQuality(),
+                    production.getPercentProduction(),
+                    production.getDestiny(),
+                }
+        ));
+    }
+    
+    public String formatDate(LocalDate date){
+        if(date == null)
+            return "";
+        return date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,11 +73,12 @@ public class FrmSearchProduction extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblEmployees = new javax.swing.JTable();
+        tblProduction = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txtCrops = new javax.swing.JTextField();
+        btnLookFor = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -42,10 +87,10 @@ public class FrmSearchProduction extends javax.swing.JDialog {
 
         jScrollPane1.setBackground(new java.awt.Color(217, 246, 248));
 
-        tblEmployees.setBackground(new java.awt.Color(255, 255, 255));
-        tblEmployees.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        tblEmployees.setForeground(new java.awt.Color(0, 0, 0));
-        tblEmployees.setModel(new javax.swing.table.DefaultTableModel(
+        tblProduction.setBackground(new java.awt.Color(255, 255, 255));
+        tblProduction.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        tblProduction.setForeground(new java.awt.Color(0, 0, 0));
+        tblProduction.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -77,9 +122,9 @@ public class FrmSearchProduction extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        tblEmployees.setGridColor(new java.awt.Color(0, 0, 0));
-        tblEmployees.setSelectionBackground(new java.awt.Color(234, 231, 203));
-        jScrollPane1.setViewportView(tblEmployees);
+        tblProduction.setGridColor(new java.awt.Color(0, 0, 0));
+        tblProduction.setSelectionBackground(new java.awt.Color(234, 231, 203));
+        jScrollPane1.setViewportView(tblProduction);
 
         jLabel1.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
@@ -87,38 +132,55 @@ public class FrmSearchProduction extends javax.swing.JDialog {
 
         jLabel2.setFont(new java.awt.Font("Candara", 1, 16)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Id del producto");
+        jLabel2.setText("Cultivo");
 
-        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        txtCrops.setBackground(new java.awt.Color(255, 255, 255));
+        txtCrops.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        txtCrops.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCropsKeyReleased(evt);
+            }
+        });
 
-        jButton1.setText("jButton1");
+        btnLookFor.setText("Buscar");
+        btnLookFor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLookForActionPerformed(evt);
+            }
+        });
+
+        btnCancel.setText("Cancelar");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jLabel2)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(345, 345, 345)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField1)
+                    .addComponent(txtCrops)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 291, Short.MAX_VALUE)
                         .addComponent(jLabel1)))
                 .addGap(289, 289, 289))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnLookFor)
+                .addGap(120, 120, 120)
+                .addComponent(btnCancel)
+                .addGap(246, 246, 246))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,12 +190,14 @@ public class FrmSearchProduction extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtCrops, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(67, 67, 67))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLookFor)
+                    .addComponent(btnCancel))
+                .addGap(74, 74, 74))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -149,6 +213,27 @@ public class FrmSearchProduction extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnLookForActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLookForActionPerformed
+        int selectedRow = tblProduction.getSelectedRow();
+        if (selectedRow==-1) return;
+        int id = (int) tblProduction.getValueAt(selectedRow, 0);
+        frmProduction.show(list.stream().filter(crop -> crop.getId()== id).findFirst().orElse(null));
+        this.dispose();
+    }//GEN-LAST:event_btnLookForActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void txtCropsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCropsKeyReleased
+        String searchText=txtCrops.getText();
+        if (searchText.trim().isEmpty()) {
+            sorter.setRowFilter(null);
+        } else {
+            sorter.setRowFilter(RowFilter.regexFilter("(?i)" + searchText));
+        }
+    }//GEN-LAST:event_txtCropsKeyReleased
 
     /**
      * @param args the command line arguments
@@ -193,12 +278,13 @@ public class FrmSearchProduction extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnLookFor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTable tblEmployees;
+    private javax.swing.JTable tblProduction;
+    private javax.swing.JTextField txtCrops;
     // End of variables declaration//GEN-END:variables
 }

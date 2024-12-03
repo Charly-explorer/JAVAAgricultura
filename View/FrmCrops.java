@@ -76,6 +76,10 @@ public class FrmCrops extends javax.swing.JInternalFrame implements IView<Crop>{
     public boolean validateRequired() {
         return UtilGui.validateFields(txtId,txtName,txtArea,txtType);
     }
+
+    public Crop getCrop() {
+        return crop;
+    }
     
     public void changeStateBtns() {
         UtilGui.changeStateButtons(btnChangeState,btnLostCrop);
@@ -447,6 +451,7 @@ public class FrmCrops extends javax.swing.JInternalFrame implements IView<Crop>{
 
     private void btnLostCropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLostCropActionPerformed
         cancelCrop(crop);
+        
         controller.update(crop);
     }//GEN-LAST:event_btnLostCropActionPerformed
 

@@ -30,7 +30,7 @@ public class CropDao extends DaoAll<CropDTO> {
 
     @Override
     public boolean update(CropDTO dto) throws SQLException {
-        if (dto == null || !validatePk(dto.getId())) {
+        if (dto == null) {
             return false;
         }
         String query = "Call CropsUpdate(?,?,?)";
@@ -44,12 +44,12 @@ public class CropDao extends DaoAll<CropDTO> {
 
     @Override
     public boolean delete(Object id) throws SQLException {
-        if (id == null || !validatePk(id)) {
+        if (id == null) {
             return false;
         }
         String query = "Call CropsDelete(?)";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setString(1, String.valueOf(id));
+            stmt.setInt(1, Integer.parseInt(String.valueOf(id)));
             return stmt.executeUpdate() > 0;
         }
     }
@@ -74,8 +74,7 @@ public class CropDao extends DaoAll<CropDTO> {
 
     @Override
     public CropDTO read(Object id) throws SQLException {
-        if (id == null || String.valueOf(id).trim().isEmpty()
-                && Integer.parseInt(String.valueOf(id)) > 0) {
+        if (id == null || Integer.parseInt(String.valueOf(id)) <= 0) {
             return null;
         }
         String query = "Call CropsRead(?)";
@@ -136,7 +135,7 @@ public class CropDao extends DaoAll<CropDTO> {
                 LostCropState.class, "L",
                 RipenningCropState.class, "R",
                 SownCropState.class, "S");
-        return states.getOrDefault(state.getClass(), "S");
+        return states.getOrDefault(state.getClass(), "L");
     }
     
     public boolean validatePk(Object key) throws SQLException{
