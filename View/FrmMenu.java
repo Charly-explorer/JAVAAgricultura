@@ -215,6 +215,7 @@ public class FrmMenu extends javax.swing.JFrame {
        frmPro.setLocation((this.deskTop.getWidth()-frmPro.getWidth())/2, 
                 (this.deskTop.getHeight()-frmPro.getHeight())/2);
         frmPro.setVisible(true);
+        frmPro.setFrmCrops(frmCrop);
     }//GEN-LAST:event_btnProductionActionPerformed
 
     /**
