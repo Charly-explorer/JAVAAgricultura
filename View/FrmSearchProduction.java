@@ -48,7 +48,7 @@ public class FrmSearchProduction extends javax.swing.JDialog {
                     production.getCrop().getName(),
                     formatDate(production.getDate()),
                     production.getAmount(),
-                    production.getQuality(),
+                    production.getAmount2(),
                     production.getPercentProduction(),
                     production.getDestiny(),
                 }

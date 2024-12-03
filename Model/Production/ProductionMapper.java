@@ -25,7 +25,7 @@ public class ProductionMapper implements Mapper<Production, ProductionDTO> {
                 ent.getCrop().getId(),
                 Date.valueOf(ent.getDate()),
                 ent.getAmount(),
-                ent.getQuality(),
+                ent.getAmount2(),
                 ent.getDestiny()
         );
     }
@@ -40,7 +40,7 @@ public class ProductionMapper implements Mapper<Production, ProductionDTO> {
                             getConnetion()).read(dto.getCrop())),
                     date.toLocalDate(),
                     dto.getAmount(),
-                    dto.getQuality(),
+                    dto.getAmount2(),
                     dto.getDestiny()
             );
         } catch (SQLException ex) {

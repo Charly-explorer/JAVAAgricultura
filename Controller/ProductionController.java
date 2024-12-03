@@ -78,7 +78,7 @@ public class ProductionController {
         return production.getId() > 0 && 
                production.getCrop() != null && 
                production.getAmount() > 0 &&
-               !production.getQuality().trim().isEmpty() &&
+               production.getAmount2() > 0 &&
                !production.getDestiny().trim().isEmpty();
     }
     

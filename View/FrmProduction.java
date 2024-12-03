@@ -47,7 +47,7 @@ public class FrmProduction extends javax.swing.JInternalFrame implements IView<P
         txtCrop.setText(String.valueOf(ent.getCrop().getId()));
         formatDate(ent.getDate(), txtDate);
         txtAmount.setText(String.valueOf(ent.getAmount()));
-        txtQuality.setText(ent.getQuality());
+        txtAmount2.setText(String.valueOf(ent.getAmount2()));
         txtPorcent.setText(String.valueOf(ent.getPercentProduction()));
         txtDestiny.setText(ent.getDestiny());
     }
@@ -75,7 +75,7 @@ public class FrmProduction extends javax.swing.JInternalFrame implements IView<P
     @Override
     public boolean validateRequired() {
         return UtilGui.validateFields(txtId,txtCrop,txtDate,
-                txtAmount,txtQuality,txtPorcent,txtDestiny);
+                txtAmount,txtAmount2,txtPorcent,txtDestiny);
     }
     
     public void formatDate(LocalDate date, JTextField txt) {
@@ -87,12 +87,11 @@ public class FrmProduction extends javax.swing.JInternalFrame implements IView<P
     }
     
     private void clear() {
-        UtilGui.clearTxts(
-                txtId,
+        UtilGui.clearTxts(txtId,
                 txtCrop,
                 txtDate,
                 txtAmount,
-                txtQuality,
+                txtAmount2,
                 txtPorcent,
                 txtDestiny
         );
@@ -103,7 +102,7 @@ public class FrmProduction extends javax.swing.JInternalFrame implements IView<P
         txtCrop.setEditable(value);
         txtDate.setEditable(value);
         txtAmount.setEditable(value);
-        txtQuality.setEditable(value);
+        txtAmount2.setEditable(value);
         txtDestiny.setEditable(value);
     }
 
@@ -128,7 +127,7 @@ public class FrmProduction extends javax.swing.JInternalFrame implements IView<P
         txtId = new javax.swing.JTextField();
         txtCrop = new javax.swing.JTextField();
         txtAmount = new javax.swing.JTextField();
-        txtQuality = new javax.swing.JTextField();
+        txtAmount2 = new javax.swing.JTextField();
         txtPorcent = new javax.swing.JTextField();
         txtDestiny = new javax.swing.JTextField();
         btnClear = new javax.swing.JButton();
@@ -137,69 +136,54 @@ public class FrmProduction extends javax.swing.JInternalFrame implements IView<P
         txtDate = new javax.swing.JFormattedTextField();
 
         jLabel1.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Producion");
 
         jLabel2.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Id ");
 
         jLabel3.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Cultivo");
 
         jLabel4.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Fecha ");
 
         jLabel5.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Cantidad");
 
         jLabel6.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel6.setText("Calidad");
+        jLabel6.setText("Cantidad de Producción");
 
         jLabel7.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Porcentaje de Producción");
 
         jLabel8.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Destino");
 
-        txtId.setBackground(new java.awt.Color(255, 255, 255));
         txtId.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        txtId.setForeground(new java.awt.Color(0, 0, 0));
 
-        txtCrop.setBackground(new java.awt.Color(255, 255, 255));
         txtCrop.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        txtCrop.setForeground(new java.awt.Color(0, 0, 0));
         txtCrop.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtCropMouseClicked(evt);
             }
         });
 
-        txtAmount.setBackground(new java.awt.Color(255, 255, 255));
         txtAmount.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        txtAmount.setForeground(new java.awt.Color(0, 0, 0));
 
-        txtQuality.setBackground(new java.awt.Color(255, 255, 255));
-        txtQuality.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        txtQuality.setForeground(new java.awt.Color(0, 0, 0));
+        txtAmount2.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        txtAmount2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAmount2ActionPerformed(evt);
+            }
+        });
 
         txtPorcent.setEditable(false);
         txtPorcent.setBackground(new java.awt.Color(255, 255, 255));
         txtPorcent.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        txtPorcent.setForeground(new java.awt.Color(0, 0, 0));
 
-        txtDestiny.setBackground(new java.awt.Color(255, 255, 255));
         txtDestiny.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        txtDestiny.setForeground(new java.awt.Color(0, 0, 0));
 
         btnClear.setFont(new java.awt.Font("Candara", 1, 17)); // NOI18N
-        btnClear.setForeground(new java.awt.Color(0, 0, 0));
         btnClear.setText("Nuevo");
         btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -208,7 +192,6 @@ public class FrmProduction extends javax.swing.JInternalFrame implements IView<P
         });
 
         btnSave.setFont(new java.awt.Font("Candara", 1, 17)); // NOI18N
-        btnSave.setForeground(new java.awt.Color(0, 0, 0));
         btnSave.setText("Guardar");
         btnSave.setEnabled(false);
         btnSave.addActionListener(new java.awt.event.ActionListener() {
@@ -218,7 +201,6 @@ public class FrmProduction extends javax.swing.JInternalFrame implements IView<P
         });
 
         btnSearch.setFont(new java.awt.Font("Candara", 1, 17)); // NOI18N
-        btnSearch.setForeground(new java.awt.Color(0, 0, 0));
         btnSearch.setText("Buscar");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -228,7 +210,6 @@ public class FrmProduction extends javax.swing.JInternalFrame implements IView<P
 
         txtDate.setEditable(false);
         txtDate.setBackground(new java.awt.Color(255, 255, 255));
-        txtDate.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -250,7 +231,7 @@ public class FrmProduction extends javax.swing.JInternalFrame implements IView<P
                                     .addComponent(jLabel2)
                                     .addComponent(txtId)
                                     .addComponent(jLabel6)
-                                    .addComponent(txtQuality, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
+                                    .addComponent(txtAmount2, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
                                     .addComponent(txtDate))
                                 .addGap(64, 64, 64)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -300,7 +281,7 @@ public class FrmProduction extends javax.swing.JInternalFrame implements IView<P
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtQuality, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAmount2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPorcent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addComponent(jLabel8)
@@ -347,7 +328,7 @@ public class FrmProduction extends javax.swing.JInternalFrame implements IView<P
         production = new Production(
                 Integer.parseInt(txtId.getText()), 
                 crop, Integer.parseInt(txtAmount.getText())
-                , txtQuality.getText(), txtDestiny.getText());
+                , Integer.parseInt(txtAmount2.getText()), txtDestiny.getText());
         controller.create(production);
         txtPorcent.setText(String.valueOf(production.getPercentProduction()));
         this.SetEditableStateTxts(false);
@@ -365,6 +346,10 @@ public class FrmProduction extends javax.swing.JInternalFrame implements IView<P
         crop = frmCrops.getCrop();
     }//GEN-LAST:event_txtCropMouseClicked
 
+    private void txtAmount2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAmount2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAmount2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;
@@ -380,11 +365,11 @@ public class FrmProduction extends javax.swing.JInternalFrame implements IView<P
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtAmount;
+    private javax.swing.JTextField txtAmount2;
     private javax.swing.JTextField txtCrop;
     private javax.swing.JFormattedTextField txtDate;
     private javax.swing.JTextField txtDestiny;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtPorcent;
-    private javax.swing.JTextField txtQuality;
     // End of variables declaration//GEN-END:variables
 }

@@ -12,7 +12,7 @@ public class Production {
     private Crop crop;
     private LocalDate date;
     private int amount;
-    private String quality;
+    private int amount2;
     private double percentProduction;
     private String destiny;
 
@@ -36,8 +36,8 @@ public class Production {
         return percentProduction;
     }
 
-    public String getQuality() {
-        return quality;
+    public int getAmount2() {
+        return amount2;
     }
 
     public String getDestiny() {
@@ -49,31 +49,31 @@ public class Production {
         this.percentProduction = calculatePercentProduction();
     }
 
-    public void setQuality(String quality) {
-        this.quality = quality;
+    public void setQuality(int amount2) {
+        this.amount2 = amount2;
     }
 
     public void setDestiny(String destiny) {
         this.destiny = destiny;
     }
 
-    protected Production(int id, Crop crop, LocalDate date, int amount, String quality, String destiny) {
+    protected Production(int id, Crop crop, LocalDate date, int amount, int amount2, String destiny) {
         this.id = id;
         this.crop = crop;
         this.date = date;
         this.amount = amount;
         this.percentProduction = calculatePercentProduction();
-        this.quality = quality;
+        this.amount2 = amount2;
         this.destiny = destiny;
     }
     
-    public Production(int id, Crop crop, int amount, String quality, String destiny) {
+    public Production(int id, Crop crop, int amount, int amount2, String destiny) {
         this.id = id;
         this.crop = crop;
         this.date = LocalDate.now();
         this.amount = amount;
         this.percentProduction = calculatePercentProduction();
-        this.quality = quality;
+        this.amount2 = amount2;
         this.destiny = destiny;
     } 
     

@@ -11,7 +11,7 @@ public class ProductionDTO {
     private final int crop;
     private final Date date;
     private final int amount;
-    private final String quality;
+    private final int amount2;
     private final String destiny;
 
     public int getId() {
@@ -30,20 +30,20 @@ public class ProductionDTO {
         return amount;
     }
 
-    public String getQuality() {
-        return quality;
+    public int getAmount2() {
+        return amount2;
     }
 
     public String getDestiny() {
         return destiny;
     }
 
-    public ProductionDTO(int id, int crop, Date date, int amount, String quality, String destiny) {
+    public ProductionDTO(int id, int crop, Date date, int amount, int amount2, String destiny) {
         this.id = id;
         this.crop = crop;
         this.date = date;
         this.amount = amount;
-        this.quality = quality;
+        this.amount2 = amount2;
         this.destiny = destiny;
     }
 }

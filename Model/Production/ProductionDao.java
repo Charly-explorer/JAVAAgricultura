@@ -32,7 +32,7 @@ public class ProductionDao extends DaoBase<ProductionDTO>{
             stmt.setInt(1, dto.getCrop());
             stmt.setDate(2, dto.getDate());
             stmt.setInt(3, dto.getAmount());
-            stmt.setString(4, dto.getQuality());
+            stmt.setInt(4, dto.getAmount2());
             stmt.setString(5, dto.getDestiny());
             return stmt.executeUpdate() > 0;
         }
@@ -53,7 +53,7 @@ public class ProductionDao extends DaoBase<ProductionDTO>{
                             rs.getInt(2), 
                             rs.getDate(3), 
                             rs.getInt(4), 
-                            rs.getString(5), 
+                            rs.getInt(5), 
                             rs.getString(6)
                     );
                 }
@@ -74,7 +74,7 @@ public class ProductionDao extends DaoBase<ProductionDTO>{
                             rs.getInt(2), 
                             rs.getDate(3), 
                             rs.getInt(4), 
-                            rs.getString(5), 
+                            rs.getInt(5), 
                             rs.getString(6)
                     )) ;
                 }
