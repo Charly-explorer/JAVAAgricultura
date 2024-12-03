@@ -4,19 +4,80 @@
  */
 package View;
 
+import Model.Crops.Crop;
+import Model.State.CropState;
+import Model.State.HarvestedCropState;
+import Model.State.LostCropState;
+import Model.State.RipenningCropState;
+import Model.State.SownCropState;
+import View.IView;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Map;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+
 /**
  *
  * @author zulay
  */
 public class FrmShearchCrops extends javax.swing.JDialog {
-
+    List<Crop> ents;
+    private IView frmCrop;
+    private DefaultTableModel tableModel;
+    TableRowSorter<TableModel> sorter; 
     /**
      * Creates new form FrmShearchCrops
      */
     public FrmShearchCrops(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        tableModel = (DefaultTableModel) tblCrops.getModel();
+        sorter = new TableRowSorter<>(this.tblCrops.getModel());
+        tblCrops.setRowSorter(sorter);
     }
+
+    public void setFrmCrop(IView frmCrop) {
+        this.frmCrop = frmCrop;
+    }
+    
+    public void setEnts(List<Crop> ents) {
+        this.ents = ents;
+        if (ents == null || tableModel == null) return;
+        tableModel.setNumRows(0);
+        
+        ents.forEach(crop -> tableModel.addRow(
+                new Object[]{
+                    crop.getId(),
+                    crop.getName(),
+                    crop.getType(),
+                    crop.getArea(),
+                    convertStateToString(crop.getState()),
+                    formatDate(crop.getSowingDate()),
+                    formatDate(crop.getHarvestDate())
+                }
+        ));
+    }
+    
+    public String convertStateToString(CropState state) {
+        Map<Class<? extends CropState>, String> states = Map.of(
+                HarvestedCropState.class, "Cosechado",
+                LostCropState.class, "Perdido",
+                RipenningCropState.class, "Maduración",
+                SownCropState.class, "Siembra");
+        return states.getOrDefault(state.getClass(), "Siembra");
+    }
+    
+    public String formatDate(LocalDate date){
+        if(date == null)
+            return "";
+        return date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,24 +90,33 @@ public class FrmShearchCrops extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtType = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblEmployees = new javax.swing.JTable();
+        tblCrops = new javax.swing.JTable();
+        jLabel5 = new javax.swing.JLabel();
+        cbxState = new javax.swing.JComboBox<>();
+        btnLookFor = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel3.setBackground(new java.awt.Color(0, 0, 0));
         jLabel3.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("Nombre");
+        jLabel3.setText("Tipo");
 
-        jTextField3.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField3.setForeground(new java.awt.Color(0, 0, 0));
+        txtType.setBackground(new java.awt.Color(255, 255, 255));
+        txtType.setForeground(new java.awt.Color(0, 0, 0));
+        txtType.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTypeKeyReleased(evt);
+            }
+        });
 
         jScrollPane1.setBackground(new java.awt.Color(217, 246, 248));
 
-        tblEmployees.setBackground(new java.awt.Color(152, 202, 202));
-        tblEmployees.setModel(new javax.swing.table.DefaultTableModel(
+        tblCrops.setBackground(new java.awt.Color(152, 202, 202));
+        tblCrops.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -60,11 +130,11 @@ public class FrmShearchCrops extends javax.swing.JDialog {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Identificacion", "Nombre", "Edad", "Telefono", "Correo", "Puesto ", "Salario"
+                "ID", "Nombre", "Tipo", "Area", "Estado", "Fecha de Siembra", "Fecha de Cosecha"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false
@@ -78,34 +148,83 @@ public class FrmShearchCrops extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        tblEmployees.setSelectionBackground(new java.awt.Color(0, 153, 153));
-        jScrollPane1.setViewportView(tblEmployees);
+        tblCrops.setSelectionBackground(new java.awt.Color(0, 153, 153));
+        jScrollPane1.setViewportView(tblCrops);
+
+        jLabel5.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel5.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setText("Estado");
+
+        cbxState.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Siembra", "Maduración", "Cosechado", "Perdido" }));
+        cbxState.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbxStateMouseClicked(evt);
+            }
+        });
+
+        btnLookFor.setText("Buscar");
+        btnLookFor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLookForActionPerformed(evt);
+            }
+        });
+
+        btnCancel.setText("Cancelar");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(498, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 761, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtType, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(32, 32, 32)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbxState, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(179, 179, 179)
+                                .addComponent(btnLookFor)
+                                .addGap(120, 120, 120)
+                                .addComponent(btnCancel)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(jLabel3)
-                .addGap(10, 10, 10)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(236, Short.MAX_VALUE))
+                .addGap(39, 39, 39)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(10, 10, 10)
+                        .addComponent(txtType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbxState, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLookFor)
+                    .addComponent(btnCancel))
+                .addGap(58, 58, 58))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -121,6 +240,36 @@ public class FrmShearchCrops extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnLookForActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLookForActionPerformed
+        int selectedRow = tblCrops.getSelectedRow();
+        if (selectedRow==-1) return;
+        int id = (int) tblCrops.getValueAt(selectedRow, 0);
+        frmCrop.show(ents.stream().filter(crop -> crop.getId()== id).findFirst().orElse(null));
+        this.dispose();
+    }//GEN-LAST:event_btnLookForActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void txtTypeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTypeKeyReleased
+        String searchText=txtType.getText();
+        if (searchText.trim().isEmpty()) {
+            sorter.setRowFilter(null);
+        } else {
+            sorter.setRowFilter(RowFilter.regexFilter("(?i)" + searchText));
+        }
+    }//GEN-LAST:event_txtTypeKeyReleased
+
+    private void cbxStateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbxStateMouseClicked
+        String searchText=String.valueOf(cbxState.getSelectedItem());
+        if (searchText.trim().isEmpty()) {
+            sorter.setRowFilter(null);
+        } else {
+            sorter.setRowFilter(RowFilter.regexFilter("(?i)" + searchText));
+        }
+    }//GEN-LAST:event_cbxStateMouseClicked
 
     /**
      * @param args the command line arguments
@@ -165,10 +314,14 @@ public class FrmShearchCrops extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnLookFor;
+    private javax.swing.JComboBox<String> cbxState;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTable tblEmployees;
+    private javax.swing.JTable tblCrops;
+    private javax.swing.JTextField txtType;
     // End of variables declaration//GEN-END:variables
 }

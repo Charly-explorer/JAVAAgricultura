@@ -58,7 +58,7 @@ public class Crop {
     
     public void setHarvestDate(LocalDate harvestDate) {
         if (state instanceof HarvestedCropState) {
-            if (harvestDate != null && harvestDate.isAfter(sowingDate)) {
+            if (harvestDate != null && (harvestDate.isEqual(sowingDate) || harvestDate.isAfter(sowingDate))) {
                 this.harvestDate = harvestDate;
             } else {
                 throw new IllegalArgumentException("La fecha de cosecha debe ser posterior a la fecha de siembra");

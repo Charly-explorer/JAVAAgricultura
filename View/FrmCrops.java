@@ -56,6 +56,7 @@ public class FrmCrops extends javax.swing.JInternalFrame implements IView<Crop>{
     public void showAll(List<Crop> ents) {
          if(frmShearch==null){
             frmShearch = new  FrmShearchCrops(null,true);
+            frmShearch.setFrmCrop(this);
         }
         frmShearch.setEnts(ents);
         frmShearch.setVisible(true);
@@ -77,7 +78,11 @@ public class FrmCrops extends javax.swing.JInternalFrame implements IView<Crop>{
     }
     
     public void changeStateBtns() {
-        UtilGui.changeStateButtons(btnSearch,btnSave,btnDelete,btnLostCrop,btnUpdate);
+        UtilGui.changeStateButtons(btnChangeState,btnLostCrop);
+    }
+
+    public CropController getController() {
+        return controller;
     }
     
     private void clear(){
@@ -92,8 +97,12 @@ public class FrmCrops extends javax.swing.JInternalFrame implements IView<Crop>{
         );
     }
     
-    public void formatDate(LocalDate date, JTextField txt){
-        txt.setText(date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+    public void formatDate(LocalDate date, JTextField txt) {
+        if (date == null) {
+            txt.setText("");
+        } else {
+            txt.setText(date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        }
     }
     
     private void SetEditableStateTxts(boolean value){
@@ -107,16 +116,20 @@ public class FrmCrops extends javax.swing.JInternalFrame implements IView<Crop>{
         if(crop.getState() instanceof SownCropState){
             crop.setState(new RipenningCropState(crop));
             showMessage("Estado actualizado a maduración");
-        }
-        if(crop.getState() instanceof RipenningCropState){
+        }else if(crop.getState() instanceof RipenningCropState){
             crop.setState(new HarvestedCropState(crop));
+            crop.setHarvestDate(LocalDate.now());
+            formatDate(LocalDate.now(),txtHarvest);
             showMessage("Estado actualizado a cosecha");
         }
+        txtState.setText(controller.convertStateToString(crop.getState()));
     }
     
     public void cancelCrop(Crop crop){
         crop.setState(new LostCropState(crop));
         showMessage("El cultivo se ha perdido");
+//        controller.convertStateToString(crop.getState());
+        txtState.setText(controller.convertStateToString(crop.getState()));
     }
 
     /** This method is called from within the constructor to
@@ -151,7 +164,6 @@ public class FrmCrops extends javax.swing.JInternalFrame implements IView<Crop>{
         txtState = new javax.swing.JTextField();
         btnSave = new javax.swing.JButton();
         btnSearch = new javax.swing.JButton();
-        btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         btnLostCrop = new javax.swing.JButton();
         btnChangeState = new javax.swing.JButton();
@@ -233,6 +245,7 @@ public class FrmCrops extends javax.swing.JInternalFrame implements IView<Crop>{
         btnSave.setFont(new java.awt.Font("Candara", 1, 17)); // NOI18N
         btnSave.setForeground(new java.awt.Color(0, 0, 0));
         btnSave.setText("Guardar");
+        btnSave.setEnabled(false);
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveActionPerformed(evt);
@@ -248,20 +261,9 @@ public class FrmCrops extends javax.swing.JInternalFrame implements IView<Crop>{
             }
         });
 
-        btnUpdate.setFont(new java.awt.Font("Candara", 1, 17)); // NOI18N
-        btnUpdate.setForeground(new java.awt.Color(0, 0, 0));
-        btnUpdate.setText("Actualizar Cultivo");
-        btnUpdate.setEnabled(false);
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
-            }
-        });
-
         btnDelete.setFont(new java.awt.Font("Candara", 1, 17)); // NOI18N
         btnDelete.setForeground(new java.awt.Color(0, 0, 0));
         btnDelete.setText("Eliminar");
-        btnDelete.setEnabled(false);
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteActionPerformed(evt);
@@ -301,52 +303,44 @@ public class FrmCrops extends javax.swing.JInternalFrame implements IView<Crop>{
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(47, 47, 47)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel4)
-                                    .addComponent(txtType, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2))
-                                .addGap(51, 51, 51)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel7)
-                                    .addComponent(txtName)
-                                    .addComponent(txtArea, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
-                                    .addComponent(txtHarvest, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtSowing)
-                                .addComponent(txtState, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addGap(370, 370, 370))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
+                        .addComponent(btnClear)
+                        .addGap(58, 58, 58)
                         .addComponent(btnSave)
-                        .addGap(67, 67, 67)
+                        .addGap(45, 45, 45)
                         .addComponent(btnSearch)
-                        .addGap(60, 60, 60)
+                        .addGap(44, 44, 44)
+                        .addComponent(btnDelete)
+                        .addGap(42, 42, 42)
+                        .addComponent(btnChangeState)
+                        .addGap(37, 37, 37)
+                        .addComponent(btnLostCrop))
+                    .addComponent(jLabel6)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel4)
+                            .addComponent(txtType, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(51, 51, 51)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnClear)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnChangeState)
-                                .addGap(240, 240, 240))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnUpdate)
-                                .addGap(66, 66, 66)
-                                .addComponent(btnDelete)
-                                .addGap(88, 88, 88)
-                                .addComponent(btnLostCrop)))))
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel7)
+                            .addComponent(txtName)
+                            .addComponent(txtArea, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
+                            .addComponent(txtHarvest, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtSowing)
+                        .addComponent(txtState, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -382,20 +376,14 @@ public class FrmCrops extends javax.swing.JInternalFrame implements IView<Crop>{
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnChangeState)
-                        .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnClear)
-                        .addGap(27, 27, 27)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSave)
                     .addComponent(btnSearch)
-                    .addComponent(btnUpdate)
                     .addComponent(btnDelete)
-                    .addComponent(btnLostCrop))
+                    .addComponent(btnLostCrop)
+                    .addComponent(btnClear)
+                    .addComponent(btnChangeState))
                 .addGap(15, 15, 15))
         );
 
@@ -429,17 +417,16 @@ public class FrmCrops extends javax.swing.JInternalFrame implements IView<Crop>{
         );
         controller.create(crop);
         this.SetEditableStateTxts(false);
+        btnSave.setEnabled(false);
         changeStateBtns();
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        // TODO add your handling code here:
+        controller.readAll();
+//        btnChangeState.setEnabled(true);
+//        btnLostCrop.setEnabled(true);
+        changeStateBtns();
     }//GEN-LAST:event_btnSearchActionPerformed
-
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        showMessage("Ya puede cambiar el estado del cultivo");
-        btnChangeState.setEnabled(true);
-    }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         if (crop==null){
@@ -455,6 +442,7 @@ public class FrmCrops extends javax.swing.JInternalFrame implements IView<Crop>{
         if(option==JOptionPane.NO_OPTION) return;
         controller.delete(crop);
         clear();
+        changeStateBtns();
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnLostCropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLostCropActionPerformed
@@ -471,7 +459,7 @@ public class FrmCrops extends javax.swing.JInternalFrame implements IView<Crop>{
         clear();
         SetEditableStateTxts(true);
         formatDate(LocalDate.now(),txtSowing);
-        changeStateBtns();
+        btnSave.setEnabled(true);
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void txtNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameKeyReleased
@@ -486,7 +474,6 @@ public class FrmCrops extends javax.swing.JInternalFrame implements IView<Crop>{
     private javax.swing.JButton btnLostCrop;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSearch;
-    private javax.swing.JButton btnUpdate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

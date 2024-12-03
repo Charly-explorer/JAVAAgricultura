@@ -18,8 +18,6 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
@@ -74,11 +72,11 @@ public class CropController {
     public void readAll(){
         try {
             List<CropDTO> dtoList = cropDao.readAll();
-            List<Crop> customerList = dtoList.stream()
+            List<Crop> crops = dtoList.stream()
                     .map(mapper::toEnt)
                     .filter(Objects::nonNull)
                     .collect(Collectors.toList());
-            view.showAll(customerList);
+            view.showAll(crops);
         } catch (SQLException ex) {
             view.showError("Error al cargar los datos: "+ ex.getMessage());
         }
@@ -134,7 +132,7 @@ public class CropController {
     public String convertStateToString(CropState state) {
         Map<Class<? extends CropState>, String> states = Map.of(
                 HarvestedCropState.class, "Cosechado",
-                LostCropState.class, "Perdida",
+                LostCropState.class, "Perdido",
                 RipenningCropState.class, "Maduración",
                 SownCropState.class, "Siembra");
         return states.getOrDefault(state.getClass(), "Siembra");
