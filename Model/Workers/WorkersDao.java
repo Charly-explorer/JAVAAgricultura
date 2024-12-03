@@ -23,17 +23,14 @@ public class WorkersDao extends DaoAll<WorkersDTO> {
         if (dto == null) {
             return false;
         }
-        String query = "Call CustomerUpdate(?,?,?,?,?,?,?,?,?)";
+        String query = "Call CustomerUpdate(?,?,?,?,?,?)";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setString(1, dto.getIdCard());
-            stmt.setString(2, dto.getName());
-            stmt.setString(3, dto.getLastName1());
-            stmt.setString(4, dto.getLastName2());
-            stmt.setString(5, dto.getTelephone());
-            stmt.setString(6, dto.getEmail());
-            stmt.setString(7, dto.getPosition());
-            stmt.setString(8, dto.getSchedule());
-            stmt.setDouble(9, dto.getSalary());
+            stmt.setString(1, dto.getTelephone());
+            stmt.setString(2, dto.getEmail());
+            stmt.setString(3, dto.getIdCard());
+            stmt.setString(4, dto.getPosition());
+            stmt.setString(5, dto.getSchedule());
+            stmt.setDouble(6, dto.getSalary());
             return stmt.executeUpdate() > 0;
         }
     }

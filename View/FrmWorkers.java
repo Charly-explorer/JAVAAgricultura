@@ -1,20 +1,91 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
 package View;
+
+import Controller.WorkerController;
+import Model.Workers.Workers;
+import Utils.UtilGui;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author zulay
  */
-public class FrmWorkers extends javax.swing.JInternalFrame {
-
+public class FrmWorkers extends javax.swing.JInternalFrame implements IView<Workers>{
+    WorkerController controller;
+    Workers worker;
+    FrmSearchWorkers frmSearch;
     /**
      * Creates new form FrmWorkers
      */
     public FrmWorkers() {
         initComponents();
+        controller = new WorkerController(this);
+    }
+    @Override
+    public void show(Workers ent) {
+        worker = ent;
+        if (ent == null) {
+            clear();
+            return;
+        }
+        txtIdCard.setText(ent.getIdCard());
+        txtName.setText(ent.getName());
+        txtLastName1.setText(ent.getLastName1());
+        txtLastName2.setText(ent.getLastName2());
+        txtTelephone.setText(ent.getTelephone());
+        txtEmail.setText(ent.getEmail());
+        txtPosition.setText(ent.getPosition());
+        txtSalary.setText(String.valueOf(ent.getSalary()));
+    }
+
+    @Override
+    public void showAll(List<Workers> ents) {
+        if (frmSearch == null) {
+            frmSearch = new FrmSearchWorkers(null, true);
+            frmSearch.setFrmWorkers(this);
+        }
+        frmSearch.setEnts(ents);
+        frmSearch.setVisible(true);
+    }
+
+    @Override
+    public void showMessage(String msg) {
+        JOptionPane.showMessageDialog(this, msg, "Información", JOptionPane.INFORMATION_MESSAGE);
+    
+    }
+    
+
+    @Override
+    public void showError(String err) {
+         JOptionPane.showMessageDialog(this, err, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    @Override
+    public boolean validateRequired() {
+        return UtilGui.validateFields(txtIdCard, txtName, txtLastName1, txtLastName2, txtTelephone, txtEmail, txtPosition,  txtSalary);
+    }
+     private void clear() {
+        UtilGui.clearTxts(
+                txtIdCard,
+                txtName,
+                txtLastName1,
+                txtLastName2,
+                txtTelephone,
+                txtEmail,
+                txtPosition,
+                txtSalary
+        );
+    }
+
+    private void setEditableStateTxts(boolean value) {
+        txtIdCard.setEditable(value);
+        txtName.setEditable(value);
+        txtLastName1.setEditable(value);
+        txtLastName2.setEditable(value);
+        txtTelephone.setEditable(value);
+        txtEmail.setEditable(value);
+        txtPosition.setEditable(value);
+        txtSalary.setEditable(value);
     }
 
     /**
@@ -36,14 +107,18 @@ public class FrmWorkers extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
+        txtIdCard = new javax.swing.JTextField();
+        txtName = new javax.swing.JTextField();
+        txtLastName1 = new javax.swing.JTextField();
+        txtTelephone = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
+        txtPosition = new javax.swing.JTextField();
+        txtSalary = new javax.swing.JTextField();
+        txtLastName2 = new javax.swing.JTextField();
+        btnSave = new javax.swing.JButton();
+        txtSchedule = new javax.swing.JTextField();
+        Horario = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
@@ -81,37 +156,57 @@ public class FrmWorkers extends javax.swing.JInternalFrame {
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Salario");
 
-        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(0, 0, 0));
+        txtIdCard.setBackground(new java.awt.Color(255, 255, 255));
+        txtIdCard.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        txtIdCard.setForeground(new java.awt.Color(0, 0, 0));
 
-        jTextField2.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField2.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jTextField2.setForeground(new java.awt.Color(0, 0, 0));
+        txtName.setBackground(new java.awt.Color(255, 255, 255));
+        txtName.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        txtName.setForeground(new java.awt.Color(0, 0, 0));
 
-        jTextField3.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField3.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jTextField3.setForeground(new java.awt.Color(0, 0, 0));
+        txtLastName1.setBackground(new java.awt.Color(255, 255, 255));
+        txtLastName1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        txtLastName1.setForeground(new java.awt.Color(0, 0, 0));
 
-        jTextField4.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField4.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jTextField4.setForeground(new java.awt.Color(0, 0, 0));
+        txtTelephone.setBackground(new java.awt.Color(255, 255, 255));
+        txtTelephone.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        txtTelephone.setForeground(new java.awt.Color(0, 0, 0));
 
-        jTextField5.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField5.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jTextField5.setForeground(new java.awt.Color(0, 0, 0));
+        txtEmail.setBackground(new java.awt.Color(255, 255, 255));
+        txtEmail.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        txtEmail.setForeground(new java.awt.Color(0, 0, 0));
 
-        jTextField6.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField6.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jTextField6.setForeground(new java.awt.Color(0, 0, 0));
+        txtPosition.setBackground(new java.awt.Color(255, 255, 255));
+        txtPosition.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        txtPosition.setForeground(new java.awt.Color(0, 0, 0));
 
-        jTextField7.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField7.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jTextField7.setForeground(new java.awt.Color(0, 0, 0));
+        txtSalary.setBackground(new java.awt.Color(255, 255, 255));
+        txtSalary.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        txtSalary.setForeground(new java.awt.Color(0, 0, 0));
 
-        jTextField8.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField8.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jTextField8.setForeground(new java.awt.Color(0, 0, 0));
+        txtLastName2.setBackground(new java.awt.Color(255, 255, 255));
+        txtLastName2.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        txtLastName2.setForeground(new java.awt.Color(0, 0, 0));
+
+        btnSave.setText("Guardar");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
+
+        txtSchedule.setBackground(new java.awt.Color(255, 255, 255));
+        txtSchedule.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        txtSchedule.setForeground(new java.awt.Color(0, 0, 0));
+
+        Horario.setText("Horario");
+
+        jButton1.setText("Buscar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -122,8 +217,8 @@ public class FrmWorkers extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTelephone, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtIdCard, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
@@ -131,17 +226,23 @@ public class FrmWorkers extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel6)
                                     .addComponent(jLabel8)
-                                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtPosition, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtLastName1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(btnSave)
+                                        .addGap(78, 78, 78)
+                                        .addComponent(jButton1))
+                                    .addComponent(txtSchedule, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Horario))
                                 .addGap(52, 52, 52)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtLastName2, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel9)
                                     .addComponent(jLabel7)
                                     .addComponent(jLabel5)
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jTextField2)))
+                                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtName)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(250, 250, 250)
                         .addComponent(jLabel1)))
@@ -155,36 +256,44 @@ public class FrmWorkers extends javax.swing.JInternalFrame {
                 .addGap(33, 33, 33)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtIdCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtLastName1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtLastName2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTelephone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(143, 143, 143))
+                    .addComponent(txtPosition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSalary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Horario)
+                .addGap(8, 8, 8)
+                .addComponent(txtSchedule, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSave)
+                    .addComponent(jButton1))
+                .addGap(38, 38, 38))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -203,8 +312,61 @@ public class FrmWorkers extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        if (!validateRequired()) { // Valida que todos los campos requeridos estén llenos
+        showError("Todos los campos son obligatorios. Por favor, complete los datos.");
+        return;
+    }
+
+    try {
+        // Obtener datos del formulario
+        String idCard = txtIdCard.getText().trim();
+        String name = txtName.getText().trim();
+        String lastName1 = txtLastName1.getText().trim();
+        String lastName2 = txtLastName2.getText().trim();
+        String telephone = txtTelephone.getText().trim();
+        String email = txtEmail.getText().trim();
+        String schedule = txtSchedule.getText().trim();
+        String position = txtPosition.getText().trim();
+        double salary= Double.parseDouble(txtSalary.getText());
+
+        try {
+            salary = Double.parseDouble(txtSalary.getText());
+        } catch (NumberFormatException e) {
+            showError("El salario debe ser un número válido.");
+            return;
+        }
+
+        // Crear objeto Workers con los datos del formulario
+        Workers worker = new Workers(idCard, name, lastName1, lastName2, telephone, email, position, schedule, salary);
+
+        // Validar campos específicos
+        if (!worker.validarCorreo(email)) {
+            showError("El correo electrónico no tiene un formato válido.");
+            return;
+        }
+        if (!worker.validarTelefono(telephone)) {
+            showError("El número de teléfono debe contener 8 dígitos.");
+            return;
+        }
+
+        // Intentar guardar el trabajador a través del controlador
+        controller.create(worker);
+        clear(); // Limpia los campos después de guardar
+    } catch (Exception ex) {
+        showError("Ocurrió un error al intentar guardar los datos: " + ex.getMessage());
+    }
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       controller.readAll();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Horario;
+    private javax.swing.JButton btnSave;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -215,13 +377,16 @@ public class FrmWorkers extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtIdCard;
+    private javax.swing.JTextField txtLastName1;
+    private javax.swing.JTextField txtLastName2;
+    private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtPosition;
+    private javax.swing.JTextField txtSalary;
+    private javax.swing.JTextField txtSchedule;
+    private javax.swing.JTextField txtTelephone;
     // End of variables declaration//GEN-END:variables
+
+    
 }

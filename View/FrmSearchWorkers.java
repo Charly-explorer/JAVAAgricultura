@@ -4,11 +4,21 @@
  */
 package View;
 
+import Model.Workers.Workers;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+
 /**
  *
  * @author zulay
  */
 public class FrmSearchWorkers extends javax.swing.JDialog {
+     List<Workers> ents;
+    private IView<Workers> frmWorkers;
+    private DefaultTableModel tableModel;
+    TableRowSorter<TableModel> sorter;
 
     /**
      * Creates new form FrmSearchWorkers
@@ -16,6 +26,40 @@ public class FrmSearchWorkers extends javax.swing.JDialog {
     public FrmSearchWorkers(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        tableModel = (DefaultTableModel) tblWorkers.getModel();
+        sorter = new TableRowSorter<>(this.tblWorkers.getModel());
+        tblWorkers.setRowSorter(sorter);
+    }
+     public void setFrmWorkers(IView<Workers> frmWorkers) {
+        this.frmWorkers = frmWorkers;
+    }
+
+    public void setEnts(List<Workers> ents) {
+        this.ents = ents;
+        if (ents == null || tableModel == null) return;
+        tableModel.setNumRows(0);
+
+        ents.forEach(worker -> tableModel.addRow(
+                new Object[]{
+                        worker.getIdCard(),
+                        worker.getName(),
+                        worker.getLastName1(),
+                        worker.getLastName2(),
+                        worker.getPosition(),
+                        worker.getTelephone(),
+                        worker.getEmail(),
+                        worker.getSalary()
+                }
+        ));
+    }
+
+    private void selectWorker() {
+        int selectedRow = tblWorkers.getSelectedRow();
+        if (selectedRow != -1 && frmWorkers != null) {
+            Workers selectedWorker = ents.get(tblWorkers.convertRowIndexToModel(selectedRow));
+            frmWorkers.show(selectedWorker);
+            this.dispose();
+        }
     }
 
     /**
@@ -29,7 +73,7 @@ public class FrmSearchWorkers extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblEmployees = new javax.swing.JTable();
+        tblWorkers = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -41,10 +85,10 @@ public class FrmSearchWorkers extends javax.swing.JDialog {
 
         jScrollPane1.setBackground(new java.awt.Color(217, 246, 248));
 
-        tblEmployees.setBackground(new java.awt.Color(255, 255, 255));
-        tblEmployees.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        tblEmployees.setForeground(new java.awt.Color(0, 0, 0));
-        tblEmployees.setModel(new javax.swing.table.DefaultTableModel(
+        tblWorkers.setBackground(new java.awt.Color(255, 255, 255));
+        tblWorkers.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        tblWorkers.setForeground(new java.awt.Color(0, 0, 0));
+        tblWorkers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -76,9 +120,9 @@ public class FrmSearchWorkers extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        tblEmployees.setGridColor(new java.awt.Color(0, 0, 0));
-        tblEmployees.setSelectionBackground(new java.awt.Color(234, 231, 203));
-        jScrollPane1.setViewportView(tblEmployees);
+        tblWorkers.setGridColor(new java.awt.Color(0, 0, 0));
+        tblWorkers.setSelectionBackground(new java.awt.Color(234, 231, 203));
+        jScrollPane1.setViewportView(tblWorkers);
 
         jLabel1.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
@@ -93,6 +137,11 @@ public class FrmSearchWorkers extends javax.swing.JDialog {
         jLabel2.setText("Busqueda de Trabajadores");
 
         jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -148,6 +197,10 @@ public class FrmSearchWorkers extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -197,6 +250,6 @@ public class FrmSearchWorkers extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTable tblEmployees;
+    private javax.swing.JTable tblWorkers;
     // End of variables declaration//GEN-END:variables
 }

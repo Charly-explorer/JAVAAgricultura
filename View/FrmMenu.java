@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
  */
 public class FrmMenu extends javax.swing.JFrame {
  private FrmCrops frmCrop;   
+ private FrmWorkers frmworkers;
     
 
     /**
@@ -18,7 +19,9 @@ public class FrmMenu extends javax.swing.JFrame {
      */
     public FrmMenu() {
         initComponents();
-        frmCrop = new FrmCrops();   
+        frmCrop = new FrmCrops();  
+        frmworkers = new FrmWorkers();  
+        
     }
 
     /**
@@ -78,6 +81,11 @@ public class FrmMenu extends javax.swing.JFrame {
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton3.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/red.png"))); // NOI18N
         jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
         jButton4.setForeground(new java.awt.Color(0, 0, 0));
@@ -161,6 +169,13 @@ public class FrmMenu extends javax.swing.JFrame {
                 (this.deskTop.getHeight()-frmCrop.getHeight())/2);
         frmCrop.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+       this.deskTop.add(frmworkers);
+       frmworkers.setLocation((this.deskTop.getWidth()-frmworkers.getWidth())/2, 
+                (this.deskTop.getHeight()-frmworkers.getHeight())/2);
+        frmworkers.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
