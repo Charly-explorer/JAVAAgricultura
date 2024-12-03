@@ -4,17 +4,107 @@
  */
 package View;
 
+import Controller.ProductionController;
+import Model.Crops.Crop;
+import Model.Production.Production;
+import Utils.UtilGui;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
 /**
  *
  * @author zulay
  */
-public class FrmProduction extends javax.swing.JInternalFrame {
-
+public class FrmProduction extends javax.swing.JInternalFrame implements IView<Production>{
+    ProductionController controller;
+    FrmSearchProduction frmShearch;
+    Production production;
+    FrmCrops frmCrops;
+    Crop crop;
     /**
      * Creates new form FrmProduction
      */
     public FrmProduction() {
         initComponents();
+        controller = new ProductionController(this);
+    }
+
+    public void setFrmCrops(FrmCrops frmCrops) {
+        this.frmCrops = frmCrops;
+    }
+    
+    @Override
+    public void show(Production ent) {
+        production=ent;
+        if (ent==null) {
+            clear();
+            return;
+        }
+        txtId.setText(String.valueOf(ent.getId()));
+        txtCrop.setText(String.valueOf(ent.getCrop().getId()));
+        formatDate(ent.getDate(), txtDate);
+        txtAmount.setText(String.valueOf(ent.getAmount()));
+        txtQuality.setText(ent.getQuality());
+        txtPorcent.setText(String.valueOf(ent.getPercentProduction()));
+        txtDestiny.setText(ent.getDestiny());
+    }
+
+    @Override
+    public void showAll(List<Production> ents) {
+        if(frmShearch==null){
+            frmShearch = new  FrmSearchProduction(null,true);
+            frmShearch.setFrmProduction(this);
+        }
+        frmShearch.setList(ents);
+        frmShearch.setVisible(true);
+    }
+
+    @Override
+    public void showMessage(String msg) {
+        JOptionPane.showMessageDialog(this, msg, "Informacion", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    @Override
+    public void showError(String err) {
+        JOptionPane.showMessageDialog(this, err, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    @Override
+    public boolean validateRequired() {
+        return UtilGui.validateFields(txtId,txtCrop,txtDate,
+                txtAmount,txtQuality,txtPorcent,txtDestiny);
+    }
+    
+    public void formatDate(LocalDate date, JTextField txt) {
+        if (date == null) {
+            txt.setText("");
+        } else {
+            txt.setText(date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        }
+    }
+    
+    private void clear() {
+        UtilGui.clearTxts(
+                txtId,
+                txtCrop,
+                txtDate,
+                txtAmount,
+                txtQuality,
+                txtPorcent,
+                txtDestiny
+        );
+    }
+    
+    private void SetEditableStateTxts(boolean value){
+        txtId.setEditable(value);
+        txtCrop.setEditable(value);
+        txtDate.setEditable(value);
+        txtAmount.setEditable(value);
+        txtQuality.setEditable(value);
+        txtDestiny.setEditable(value);
     }
 
     /**
@@ -35,13 +125,16 @@ public class FrmProduction extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
+        txtId = new javax.swing.JTextField();
+        txtCrop = new javax.swing.JTextField();
+        txtAmount = new javax.swing.JTextField();
+        txtQuality = new javax.swing.JTextField();
+        txtPorcent = new javax.swing.JTextField();
+        txtDestiny = new javax.swing.JTextField();
+        btnClear = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
+        btnSearch = new javax.swing.JButton();
+        txtDate = new javax.swing.JFormattedTextField();
 
         jLabel1.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
@@ -75,69 +168,107 @@ public class FrmProduction extends javax.swing.JInternalFrame {
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Destino");
 
-        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(0, 0, 0));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+        txtId.setBackground(new java.awt.Color(255, 255, 255));
+        txtId.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        txtId.setForeground(new java.awt.Color(0, 0, 0));
+
+        txtCrop.setBackground(new java.awt.Color(255, 255, 255));
+        txtCrop.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        txtCrop.setForeground(new java.awt.Color(0, 0, 0));
+        txtCrop.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtCropMouseClicked(evt);
             }
         });
 
-        jTextField2.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField2.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jTextField2.setForeground(new java.awt.Color(0, 0, 0));
+        txtAmount.setBackground(new java.awt.Color(255, 255, 255));
+        txtAmount.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        txtAmount.setForeground(new java.awt.Color(0, 0, 0));
 
-        jTextField3.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField3.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jTextField3.setForeground(new java.awt.Color(0, 0, 0));
+        txtQuality.setBackground(new java.awt.Color(255, 255, 255));
+        txtQuality.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        txtQuality.setForeground(new java.awt.Color(0, 0, 0));
 
-        jTextField4.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField4.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jTextField4.setForeground(new java.awt.Color(0, 0, 0));
+        txtPorcent.setEditable(false);
+        txtPorcent.setBackground(new java.awt.Color(255, 255, 255));
+        txtPorcent.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        txtPorcent.setForeground(new java.awt.Color(0, 0, 0));
 
-        jTextField5.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField5.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jTextField5.setForeground(new java.awt.Color(0, 0, 0));
+        txtDestiny.setBackground(new java.awt.Color(255, 255, 255));
+        txtDestiny.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        txtDestiny.setForeground(new java.awt.Color(0, 0, 0));
 
-        jTextField6.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField6.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jTextField6.setForeground(new java.awt.Color(0, 0, 0));
+        btnClear.setFont(new java.awt.Font("Candara", 1, 17)); // NOI18N
+        btnClear.setForeground(new java.awt.Color(0, 0, 0));
+        btnClear.setText("Nuevo");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
 
-        jTextField7.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField7.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jTextField7.setForeground(new java.awt.Color(0, 0, 0));
+        btnSave.setFont(new java.awt.Font("Candara", 1, 17)); // NOI18N
+        btnSave.setForeground(new java.awt.Color(0, 0, 0));
+        btnSave.setText("Guardar");
+        btnSave.setEnabled(false);
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
+
+        btnSearch.setFont(new java.awt.Font("Candara", 1, 17)); // NOI18N
+        btnSearch.setForeground(new java.awt.Color(0, 0, 0));
+        btnSearch.setText("Buscar");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
+
+        txtDate.setEditable(false);
+        txtDate.setBackground(new java.awt.Color(255, 255, 255));
+        txtDate.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel4)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField3)
-                            .addComponent(jLabel2)
-                            .addComponent(jTextField1)
-                            .addComponent(jLabel6)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE))
-                        .addGap(64, 64, 64)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel3)
-                            .addComponent(jTextField2)
-                            .addComponent(jLabel5)
-                            .addComponent(jTextField4)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)))
-                    .addComponent(jTextField7))
-                .addContainerGap(32, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(256, 256, 256))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel4)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel2)
+                                    .addComponent(txtId)
+                                    .addComponent(jLabel6)
+                                    .addComponent(txtQuality, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
+                                    .addComponent(txtDate))
+                                .addGap(64, 64, 64)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel3)
+                                    .addComponent(txtCrop)
+                                    .addComponent(jLabel5)
+                                    .addComponent(txtAmount)
+                                    .addComponent(txtPorcent, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)))
+                            .addComponent(txtDestiny)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addComponent(btnClear)
+                        .addGap(58, 58, 58)
+                        .addComponent(btnSave)
+                        .addGap(45, 45, 45)
+                        .addComponent(btnSearch)))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,29 +284,34 @@ public class FrmProduction extends javax.swing.JInternalFrame {
                         .addComponent(jLabel3)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCrop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
+                    .addComponent(txtAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtQuality, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPorcent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(114, Short.MAX_VALUE))
+                .addComponent(txtDestiny, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSave)
+                    .addComponent(btnSearch)
+                    .addComponent(btnClear))
+                .addGap(40, 40, 40))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -196,12 +332,44 @@ public class FrmProduction extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        clear();
+        SetEditableStateTxts(true);
+        formatDate(LocalDate.now(),txtDate);
+        btnSave.setEnabled(true);
+    }//GEN-LAST:event_btnClearActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        if (!validateRequired()) {
+            showError("Faltan algunos datos por ingresar");
+            return;
+        }
+        production = new Production(
+                Integer.parseInt(txtId.getText()), 
+                crop, Integer.parseInt(txtAmount.getText())
+                , txtQuality.getText(), txtDestiny.getText());
+        controller.create(production);
+        txtPorcent.setText(String.valueOf(production.getPercentProduction()));
+        this.SetEditableStateTxts(false);
+        btnSave.setEnabled(false);
+//        changeStateBtns();
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        controller.readAll();
+//        changeStateBtns();
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void txtCropMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCropMouseClicked
+        frmCrops.controller.readAll();
+        crop = frmCrops.getCrop();
+    }//GEN-LAST:event_txtCropMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnClear;
+    private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -211,12 +379,12 @@ public class FrmProduction extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField txtAmount;
+    private javax.swing.JTextField txtCrop;
+    private javax.swing.JFormattedTextField txtDate;
+    private javax.swing.JTextField txtDestiny;
+    private javax.swing.JTextField txtId;
+    private javax.swing.JTextField txtPorcent;
+    private javax.swing.JTextField txtQuality;
     // End of variables declaration//GEN-END:variables
 }
