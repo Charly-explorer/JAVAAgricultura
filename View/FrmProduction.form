@@ -45,17 +45,14 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="195" max="-2" attributes="0"/>
+              </Group>
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
-                          <Component id="btnClear" min="-2" pref="82" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
-                          <Component id="btnSave" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
-                          <Component id="btnSearch" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
@@ -85,13 +82,18 @@
                               <Component id="txtCrop" alignment="0" min="-2" pref="211" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="btnClear" min="-2" pref="82" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                          <Component id="btnSave" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+                          <Component id="btnSearch" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace pref="32" max="32767" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="195" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -126,15 +128,24 @@
                   </Group>
                   <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                   <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="txtDestiny" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="btnSave" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnSearch" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnClear" alignment="0" min="-2" pref="82" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="txtDestiny" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="btnSave" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnSearch" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnClear" alignment="0" min="-2" pref="82" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -368,6 +379,21 @@
           </Properties>
           <Events>
             <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="txtAmountProductionStateChanged"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel2">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="0" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Candara" size="36" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="XML"/>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel2MouseClicked"/>
           </Events>
         </Component>
       </SubComponents>
