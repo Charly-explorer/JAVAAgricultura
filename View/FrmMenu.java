@@ -66,6 +66,7 @@ public class FrmMenu extends javax.swing.JFrame {
         setResizable(false);
 
         btnCrop.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        btnCrop.setForeground(new java.awt.Color(0, 0, 0));
         btnCrop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/plan98.png"))); // NOI18N
         btnCrop.setText("Cultivos ");
         btnCrop.setBorderPainted(false);
@@ -80,6 +81,7 @@ public class FrmMenu extends javax.swing.JFrame {
         });
 
         btnUser.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        btnUser.setForeground(new java.awt.Color(0, 0, 0));
         btnUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/conexion(1).png"))); // NOI18N
         btnUser.setText("Usuarios");
         btnUser.setBorderPainted(false);
@@ -94,6 +96,7 @@ public class FrmMenu extends javax.swing.JFrame {
         });
 
         btnWorkers.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        btnWorkers.setForeground(new java.awt.Color(0, 0, 0));
         btnWorkers.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/red(1).png"))); // NOI18N
         btnWorkers.setText("Trabajadores");
         btnWorkers.setBorderPainted(false);
@@ -108,6 +111,7 @@ public class FrmMenu extends javax.swing.JFrame {
         });
 
         btnStroge.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        btnStroge.setForeground(new java.awt.Color(0, 0, 0));
         btnStroge.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/granero(3).png"))); // NOI18N
         btnStroge.setText("Alamacenamiento ");
         btnStroge.setBorderPainted(false);
@@ -122,6 +126,7 @@ public class FrmMenu extends javax.swing.JFrame {
         });
 
         btnProduction.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        btnProduction.setForeground(new java.awt.Color(0, 0, 0));
         btnProduction.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/sostenible98.png"))); // NOI18N
         btnProduction.setText("Producion");
         btnProduction.setBorderPainted(false);
@@ -135,7 +140,15 @@ public class FrmMenu extends javax.swing.JFrame {
             }
         });
 
+        btnLogOut.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        btnLogOut.setForeground(new java.awt.Color(0, 0, 0));
+        btnLogOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/user.png"))); // NOI18N
         btnLogOut.setText("Cerrar Sesion");
+        btnLogOut.setBorderPainted(false);
+        btnLogOut.setContentAreaFilled(false);
+        btnLogOut.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLogOut.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/user64 (2).png"))); // NOI18N
+        btnLogOut.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnLogOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLogOutActionPerformed(evt);
