@@ -97,12 +97,15 @@ public class FrmShearchCrops extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(255, 241, 203));
+
         jLabel3.setBackground(new java.awt.Color(0, 0, 0));
         jLabel3.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Tipo");
 
         txtType.setBackground(new java.awt.Color(255, 255, 255));
+        txtType.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtType.setForeground(new java.awt.Color(0, 0, 0));
         txtType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,7 +120,9 @@ public class FrmShearchCrops extends javax.swing.JDialog {
 
         jScrollPane1.setBackground(new java.awt.Color(217, 246, 248));
 
-        tblCrops.setBackground(new java.awt.Color(152, 202, 202));
+        tblCrops.setBackground(new java.awt.Color(255, 255, 255));
+        tblCrops.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        tblCrops.setForeground(new java.awt.Color(0, 0, 0));
         tblCrops.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -150,7 +155,8 @@ public class FrmShearchCrops extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        tblCrops.setSelectionBackground(new java.awt.Color(0, 153, 153));
+        tblCrops.setGridColor(new java.awt.Color(0, 0, 0));
+        tblCrops.setSelectionBackground(new java.awt.Color(255, 241, 203));
         jScrollPane1.setViewportView(tblCrops);
 
         jLabel5.setBackground(new java.awt.Color(0, 0, 0));
@@ -158,6 +164,9 @@ public class FrmShearchCrops extends javax.swing.JDialog {
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Estado");
 
+        cbxState.setBackground(new java.awt.Color(255, 255, 255));
+        cbxState.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        cbxState.setForeground(new java.awt.Color(0, 0, 0));
         cbxState.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Siembra", "Maduración", "Cosechado", "Perdido" }));
         cbxState.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -165,14 +174,30 @@ public class FrmShearchCrops extends javax.swing.JDialog {
             }
         });
 
+        btnLookFor.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        btnLookFor.setForeground(new java.awt.Color(0, 0, 0));
+        btnLookFor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/search44.png"))); // NOI18N
         btnLookFor.setText("Buscar");
+        btnLookFor.setBorderPainted(false);
+        btnLookFor.setContentAreaFilled(false);
+        btnLookFor.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLookFor.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/serac64.png"))); // NOI18N
+        btnLookFor.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnLookFor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLookForActionPerformed(evt);
             }
         });
 
+        btnCancel.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        btnCancel.setForeground(new java.awt.Color(0, 0, 0));
+        btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/cancel48.png"))); // NOI18N
         btnCancel.setText("Cancelar");
+        btnCancel.setBorderPainted(false);
+        btnCancel.setContentAreaFilled(false);
+        btnCancel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCancel.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/cancel.png"))); // NOI18N
+        btnCancel.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelActionPerformed(evt);
@@ -200,10 +225,10 @@ public class FrmShearchCrops extends javax.swing.JDialog {
                                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(cbxState, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(179, 179, 179)
+                                .addGap(242, 242, 242)
                                 .addComponent(btnLookFor)
-                                .addGap(120, 120, 120)
-                                .addComponent(btnCancel)))
+                                .addGap(133, 133, 133)
+                                .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -220,13 +245,13 @@ public class FrmShearchCrops extends javax.swing.JDialog {
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbxState, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(37, 37, 37)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnLookFor)
-                    .addComponent(btnCancel))
-                .addGap(58, 58, 58))
+                    .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(44, 44, 44))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

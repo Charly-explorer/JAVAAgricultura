@@ -13,6 +13,8 @@ import Model.State.RipenningCropState;
 import Model.State.SownCropState;
 import Utils.UtilGui;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -175,12 +177,14 @@ public class FrmCrops extends javax.swing.JInternalFrame implements IView<Crop>{
 
         setClosable(true);
 
+        jPanel1.setBackground(new java.awt.Color(255, 241, 203));
         jPanel1.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel1.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Candara", 1, 20)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Cultivos");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/plan64.png"))); // NOI18N
+        jLabel1.setText("CULTIVOS");
 
         jLabel2.setBackground(new java.awt.Color(0, 0, 0));
         jLabel2.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
@@ -249,12 +253,21 @@ public class FrmCrops extends javax.swing.JInternalFrame implements IView<Crop>{
 
         txtState.setEditable(false);
         txtState.setBackground(new java.awt.Color(255, 255, 255));
+        txtState.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         txtState.setForeground(new java.awt.Color(0, 0, 0));
 
         btnSave.setFont(new java.awt.Font("Candara", 1, 17)); // NOI18N
         btnSave.setForeground(new java.awt.Color(0, 0, 0));
+        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/guardar48.png"))); // NOI18N
         btnSave.setText("Guardar");
+        btnSave.setBorderPainted(false);
+        btnSave.setContentAreaFilled(false);
+        btnSave.setDefaultCapable(false);
         btnSave.setEnabled(false);
+        btnSave.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnSave.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/guaradar.png"))); // NOI18N
+        btnSave.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/guaradar.png"))); // NOI18N
+        btnSave.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveActionPerformed(evt);
@@ -263,7 +276,15 @@ public class FrmCrops extends javax.swing.JInternalFrame implements IView<Crop>{
 
         btnSearch.setFont(new java.awt.Font("Candara", 1, 17)); // NOI18N
         btnSearch.setForeground(new java.awt.Color(0, 0, 0));
+        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/search44.png"))); // NOI18N
         btnSearch.setText("Buscar");
+        btnSearch.setBorderPainted(false);
+        btnSearch.setContentAreaFilled(false);
+        btnSearch.setDefaultCapable(false);
+        btnSearch.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnSearch.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/serac64.png"))); // NOI18N
+        btnSearch.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/serac64.png"))); // NOI18N
+        btnSearch.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchActionPerformed(evt);
@@ -272,7 +293,15 @@ public class FrmCrops extends javax.swing.JInternalFrame implements IView<Crop>{
 
         btnDelete.setFont(new java.awt.Font("Candara", 1, 17)); // NOI18N
         btnDelete.setForeground(new java.awt.Color(0, 0, 0));
+        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/delete46.png"))); // NOI18N
         btnDelete.setText("Eliminar");
+        btnDelete.setBorderPainted(false);
+        btnDelete.setContentAreaFilled(false);
+        btnDelete.setDefaultCapable(false);
+        btnDelete.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnDelete.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/delete64.png"))); // NOI18N
+        btnDelete.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/delete64.png"))); // NOI18N
+        btnDelete.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteActionPerformed(evt);
@@ -281,8 +310,16 @@ public class FrmCrops extends javax.swing.JInternalFrame implements IView<Crop>{
 
         btnLostCrop.setFont(new java.awt.Font("Candara", 1, 17)); // NOI18N
         btnLostCrop.setForeground(new java.awt.Color(0, 0, 0));
+        btnLostCrop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/sigue.png"))); // NOI18N
         btnLostCrop.setText("Perdida de Cosecha");
+        btnLostCrop.setBorderPainted(false);
+        btnLostCrop.setContentAreaFilled(false);
+        btnLostCrop.setDefaultCapable(false);
         btnLostCrop.setEnabled(false);
+        btnLostCrop.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLostCrop.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/siguiente64.png"))); // NOI18N
+        btnLostCrop.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/siguiente64.png"))); // NOI18N
+        btnLostCrop.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnLostCrop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLostCropActionPerformed(evt);
@@ -291,8 +328,15 @@ public class FrmCrops extends javax.swing.JInternalFrame implements IView<Crop>{
 
         btnChangeState.setFont(new java.awt.Font("Candara", 1, 17)); // NOI18N
         btnChangeState.setForeground(new java.awt.Color(0, 0, 0));
+        btnChangeState.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/sigue.png"))); // NOI18N
         btnChangeState.setText("Siguiente Estado");
+        btnChangeState.setBorderPainted(false);
+        btnChangeState.setContentAreaFilled(false);
         btnChangeState.setEnabled(false);
+        btnChangeState.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnChangeState.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/siguiente64.png"))); // NOI18N
+        btnChangeState.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/serac64.png"))); // NOI18N
+        btnChangeState.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnChangeState.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnChangeStateActionPerformed(evt);
@@ -301,7 +345,14 @@ public class FrmCrops extends javax.swing.JInternalFrame implements IView<Crop>{
 
         btnClear.setFont(new java.awt.Font("Candara", 1, 17)); // NOI18N
         btnClear.setForeground(new java.awt.Color(0, 0, 0));
+        btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/agre46.png"))); // NOI18N
         btnClear.setText("Nuevo");
+        btnClear.setBorderPainted(false);
+        btnClear.setContentAreaFilled(false);
+        btnClear.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnClear.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/agre.png"))); // NOI18N
+        btnClear.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/agre.png"))); // NOI18N
+        btnClear.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClearActionPerformed(evt);
@@ -312,52 +363,58 @@ public class FrmCrops extends javax.swing.JInternalFrame implements IView<Crop>{
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(47, 47, 47)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnClear)
                         .addGap(58, 58, 58)
-                        .addComponent(btnSave)
-                        .addGap(45, 45, 45)
-                        .addComponent(btnSearch)
-                        .addGap(44, 44, 44)
-                        .addComponent(btnDelete)
-                        .addGap(42, 42, 42)
-                        .addComponent(btnChangeState)
-                        .addGap(37, 37, 37)
-                        .addComponent(btnLostCrop))
-                    .addComponent(jLabel6)
+                        .addComponent(btnSave))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel4)
-                            .addComponent(txtType, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(51, 51, 51)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel7)
-                            .addComponent(txtName)
-                            .addComponent(txtArea, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
-                            .addComponent(txtHarvest, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(243, 243, 243)
+                        .addComponent(btnSearch)
+                        .addGap(52, 52, 52)
+                        .addComponent(btnDelete)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addComponent(btnChangeState)
+                .addGap(60, 60, 60)
+                .addComponent(btnLostCrop)
+                .addGap(22, 22, 22))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel4)
+                    .addComponent(txtType, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtSowing)
-                        .addComponent(txtState, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)))
+                        .addComponent(txtState, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtName)
+                    .addComponent(txtArea)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel7)
+                            .addComponent(txtHarvest, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(198, 198, 198)))
+                .addGap(113, 113, 113))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(354, 354, 354)
+                .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addGap(16, 16, 16)
                 .addComponent(jLabel1)
-                .addGap(30, 30, 30)
+                .addGap(49, 49, 49)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
@@ -381,17 +438,18 @@ public class FrmCrops extends javax.swing.JInternalFrame implements IView<Crop>{
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSowing, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtHarvest, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(50, 50, 50)
+                .addGap(28, 28, 28)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSave)
-                    .addComponent(btnSearch)
-                    .addComponent(btnDelete)
-                    .addComponent(btnLostCrop)
-                    .addComponent(btnClear)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnSave)
+                        .addComponent(btnSearch)
+                        .addComponent(btnDelete)
+                        .addComponent(btnLostCrop)
+                        .addComponent(btnClear))
                     .addComponent(btnChangeState))
                 .addGap(15, 15, 15))
         );
@@ -406,8 +464,7 @@ public class FrmCrops extends javax.swing.JInternalFrame implements IView<Crop>{
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
