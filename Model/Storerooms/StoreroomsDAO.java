@@ -24,13 +24,11 @@ public class StoreroomsDAO extends DaoUpdate<StoreroomsDTO> {
         if (dto == null) {
             return false;
         }
-        String query = "Call StorageUpdate(?,?,?,?,?)";
+        String query = "Call StorageUpdate(?,?,?)";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setInt(1, dto.getIdProduccion());
-            stmt.setDouble(2, dto.getIdQuantity());
-            stmt.setDate(3, (Date) dto.getEntryDate());
-            stmt.setDate(4, (Date) dto.getDepartureDate());
-            stmt.setBoolean(5, dto.isAlert());
+            stmt.setInt(1, dto.getId());
+            stmt.setDouble(3, dto.getIdQuantity());
+            stmt.setDate(2, (Date) dto.getDepartureDate());
             return stmt.executeUpdate() > 0;
         }
     }

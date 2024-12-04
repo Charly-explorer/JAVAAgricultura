@@ -17,7 +17,6 @@ import javax.swing.JOptionPane;
  */
 public class FrmLogin extends javax.swing.JFrame {
 
-    private UsersController controller;
     FrmMenu menu;
     private Login login;
 
@@ -26,7 +25,7 @@ public class FrmLogin extends javax.swing.JFrame {
      */
     public FrmLogin() {
         initComponents();
-//        this.controller  = new UsersController((IView)this);
+        this.setLocationRelativeTo(null);
         menu = new FrmMenu();
         try {
             this.login = new Login(DataBase.DataBase.getConnetion());
@@ -43,6 +42,11 @@ public class FrmLogin extends javax.swing.JFrame {
                     "Campos Vacíos", JOptionPane.WARNING_MESSAGE);
             return -1;
         }
+    }
+    
+    public void clean(){
+        txtUser.setText("");
+        txtPasword.setText("");
     }
 
     /**
@@ -68,6 +72,7 @@ public class FrmLogin extends javax.swing.JFrame {
         btnLogin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocation(new java.awt.Point(0, 0));
 
         jDesktopPane1.setForeground(new java.awt.Color(0, 0, 0));
 
@@ -157,11 +162,17 @@ public class FrmLogin extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         if (login() > 0) {
+            if (login() > 1){
+                menu.setBtnWorkers();
+            }
             menu.setVisible(true);
+            menu.setFrmSesion(this);
+            clean();
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Las credenciales no son correctas", "Error", JOptionPane.ERROR_MESSAGE);
         }
+        
     }//GEN-LAST:event_btnLoginActionPerformed
 
     /**

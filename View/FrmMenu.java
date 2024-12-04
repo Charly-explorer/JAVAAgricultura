@@ -5,6 +5,8 @@
 package View;
 import java.awt.Graphics;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 /**
  *
  * @author carlo
@@ -15,12 +17,14 @@ public class FrmMenu extends javax.swing.JFrame {
  private FrmUsers frmUser;
  private FrmStroge frmStroge;  
  private FrmProduction frmPro;
+ private FrmLogin frmSesion;
 
     /**
      * Creates new form Inicio
      */
     public FrmMenu() {
         initComponents();
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frmCrop = new FrmCrops();  
         frmworkers = new FrmWorkers();  
         frmUser = new FrmUsers();
@@ -28,6 +32,13 @@ public class FrmMenu extends javax.swing.JFrame {
         frmPro = new FrmProduction();
     }
 
+    public void setBtnWorkers() {
+        this.btnWorkers.setEnabled(false);
+    }
+
+    public void setFrmSesion(FrmLogin frmSesion) {
+        this.frmSesion = frmSesion;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,11 +59,13 @@ public class FrmMenu extends javax.swing.JFrame {
         btnWorkers = new javax.swing.JButton();
         btnStroge = new javax.swing.JButton();
         btnProduction = new javax.swing.JButton();
+        btnLogOut = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Panel de Administracion");
+        setResizable(false);
 
         btnCrop.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
-        btnCrop.setForeground(new java.awt.Color(0, 0, 0));
         btnCrop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/plan98.png"))); // NOI18N
         btnCrop.setText("Cultivos ");
         btnCrop.setBorderPainted(false);
@@ -67,7 +80,6 @@ public class FrmMenu extends javax.swing.JFrame {
         });
 
         btnUser.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
-        btnUser.setForeground(new java.awt.Color(0, 0, 0));
         btnUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/conexion(1).png"))); // NOI18N
         btnUser.setText("Usuarios");
         btnUser.setBorderPainted(false);
@@ -82,7 +94,6 @@ public class FrmMenu extends javax.swing.JFrame {
         });
 
         btnWorkers.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
-        btnWorkers.setForeground(new java.awt.Color(0, 0, 0));
         btnWorkers.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/red(1).png"))); // NOI18N
         btnWorkers.setText("Trabajadores");
         btnWorkers.setBorderPainted(false);
@@ -97,7 +108,6 @@ public class FrmMenu extends javax.swing.JFrame {
         });
 
         btnStroge.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
-        btnStroge.setForeground(new java.awt.Color(0, 0, 0));
         btnStroge.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/granero(3).png"))); // NOI18N
         btnStroge.setText("Alamacenamiento ");
         btnStroge.setBorderPainted(false);
@@ -112,7 +122,6 @@ public class FrmMenu extends javax.swing.JFrame {
         });
 
         btnProduction.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
-        btnProduction.setForeground(new java.awt.Color(0, 0, 0));
         btnProduction.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/sostenible98.png"))); // NOI18N
         btnProduction.setText("Producion");
         btnProduction.setBorderPainted(false);
@@ -126,22 +135,36 @@ public class FrmMenu extends javax.swing.JFrame {
             }
         });
 
+        btnLogOut.setText("Cerrar Sesion");
+        btnLogOut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogOutActionPerformed(evt);
+            }
+        });
+
         deskTop.setLayer(btnCrop, javax.swing.JLayeredPane.DEFAULT_LAYER);
         deskTop.setLayer(btnUser, javax.swing.JLayeredPane.DEFAULT_LAYER);
         deskTop.setLayer(btnWorkers, javax.swing.JLayeredPane.DEFAULT_LAYER);
         deskTop.setLayer(btnStroge, javax.swing.JLayeredPane.DEFAULT_LAYER);
         deskTop.setLayer(btnProduction, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        deskTop.setLayer(btnLogOut, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout deskTopLayout = new javax.swing.GroupLayout(deskTop);
         deskTop.setLayout(deskTopLayout);
         deskTopLayout.setHorizontalGroup(
             deskTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(deskTopLayout.createSequentialGroup()
-                .addContainerGap(516, Short.MAX_VALUE)
                 .addGroup(deskTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnUser, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnWorkers, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(122, 122, 122)
+                    .addGroup(deskTopLayout.createSequentialGroup()
+                        .addContainerGap(516, Short.MAX_VALUE)
+                        .addGroup(deskTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnUser, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnWorkers, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(122, 122, 122))
+                    .addGroup(deskTopLayout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(btnLogOut)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(deskTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnCrop)
                     .addComponent(btnStroge)
@@ -159,7 +182,9 @@ public class FrmMenu extends javax.swing.JFrame {
                 .addComponent(btnProduction)
                 .addContainerGap())
             .addGroup(deskTopLayout.createSequentialGroup()
-                .addGap(80, 80, 80)
+                .addGap(14, 14, 14)
+                .addComponent(btnLogOut)
+                .addGap(42, 42, 42)
                 .addComponent(btnUser)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnWorkers)
@@ -219,6 +244,12 @@ public class FrmMenu extends javax.swing.JFrame {
         frmPro.setFrmCrops(frmCrop);
     }//GEN-LAST:event_btnProductionActionPerformed
 
+    private void btnLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogOutActionPerformed
+        this.dispose();
+        frmSesion.setVisible(true);
+        btnWorkers.setEnabled(true);
+    }//GEN-LAST:event_btnLogOutActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -257,6 +288,7 @@ public class FrmMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCrop;
+    private javax.swing.JButton btnLogOut;
     private javax.swing.JButton btnProduction;
     private javax.swing.JButton btnStroge;
     private javax.swing.JButton btnUser;

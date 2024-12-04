@@ -69,7 +69,7 @@ public class ProductionDao extends DaoBase<ProductionDTO> {
         ArrayList<ProductionDTO> list = new ArrayList();
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
+                while (rs.next()) {
                     list.add(new ProductionDTO(
                             rs.getInt(1),
                             rs.getInt(2),
@@ -83,5 +83,6 @@ public class ProductionDao extends DaoBase<ProductionDTO> {
         }
         return list;
     }
+    
 
 }

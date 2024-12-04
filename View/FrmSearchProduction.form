@@ -126,7 +126,7 @@
                     <Column editable="false" title="Cultivo" type="java.lang.String"/>
                     <Column editable="false" title="Fecha" type="java.lang.String"/>
                     <Column editable="false" title="Cantidad" type="java.lang.Integer"/>
-                    <Column editable="false" title="Calidad" type="java.lang.String"/>
+                    <Column editable="false" title="Producido" type="java.lang.String"/>
                     <Column editable="false" title="Porcentaje de Produccion" type="java.lang.Double"/>
                     <Column editable="false" title="Destino" type="java.lang.String"/>
                   </Table>

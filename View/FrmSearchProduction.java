@@ -101,7 +101,7 @@ public class FrmSearchProduction extends javax.swing.JDialog {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Id", "Cultivo", "Fecha", "Cantidad", "Calidad", "Porcentaje de Produccion", "Destino"
+                "Id", "Cultivo", "Fecha", "Cantidad", "Producido", "Porcentaje de Produccion", "Destino"
             }
         ) {
             Class[] types = new Class [] {
