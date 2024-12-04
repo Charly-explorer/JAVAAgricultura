@@ -63,10 +63,11 @@ if (id == null || String.valueOf(id).trim().isEmpty()) {
                 if (rs.next()) {
                     return new StoreroomsDTO(
                             rs.getInt(1),
-                            rs.getDouble(2),
-                             rs.getDate(3),
+                            rs.getInt(2),
+                            rs.getDouble(3),
                              rs.getDate(4),
-                            rs.getBoolean(5));
+                             rs.getDate(5),
+                            rs.getBoolean(6));
 
                 }
             }
@@ -81,11 +82,12 @@ String query = "Call CustomerReadAll()";
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     list.add(new StoreroomsDTO(
-                           rs.getInt(1),
-                            rs.getDouble(2),
-                             rs.getDate(3),
+                            rs.getInt(1),
+                           rs.getInt(2),
+                            rs.getDouble(3),
                              rs.getDate(4),
-                            rs.getBoolean(5)));
+                             rs.getDate(5),
+                            rs.getBoolean(6)));
 
                 }
             }
