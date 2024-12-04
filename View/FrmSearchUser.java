@@ -4,11 +4,22 @@
  */
 package View;
 
+import Model.Users.Users;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+
 /**
  *
  * @author zulay
  */
 public class FrmSearchUser extends javax.swing.JDialog {
+
+    List<Users> ents;
+    private IView frmUser;
+    private DefaultTableModel tableModel;
+    TableRowSorter<TableModel> sorter;
 
     /**
      * Creates new form FrmSearchUser
@@ -16,6 +27,36 @@ public class FrmSearchUser extends javax.swing.JDialog {
     public FrmSearchUser(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        tableModel = (DefaultTableModel) tblUser.getModel();
+        sorter = new TableRowSorter<>(this.tblUser.getModel());
+        tblUser.setRowSorter(sorter);
+
+    }
+
+    public void setFrmUser(IView frmCrop) {
+        this.frmUser = frmUser;
+    }
+
+    public void setEnts(List<Users> ents) {
+        this.ents = ents;
+        if (ents == null || tableModel == null) {
+            return;
+        }
+        tableModel.setNumRows(0);
+        ents.forEach(user -> tableModel.addRow(
+                new Object[]{
+                    user.getId(),
+                    user.getName(),
+                    maskPassword(user.getPassword())
+                }
+        ));
+    }
+
+    private String maskPassword(String password) {
+        if (password == null || password.isEmpty()) {
+            return "";
+        }
+        return "******";
     }
 
     /**
@@ -30,10 +71,11 @@ public class FrmSearchUser extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtIdUser = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblEmployees = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        tblUser = new javax.swing.JTable();
+        btnsearch = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -47,37 +89,37 @@ public class FrmSearchUser extends javax.swing.JDialog {
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Id del Usuario");
 
-        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(0, 0, 0));
+        txtIdUser.setBackground(new java.awt.Color(255, 255, 255));
+        txtIdUser.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        txtIdUser.setForeground(new java.awt.Color(0, 0, 0));
 
         jScrollPane1.setBackground(new java.awt.Color(217, 246, 248));
 
-        tblEmployees.setBackground(new java.awt.Color(255, 255, 255));
-        tblEmployees.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        tblEmployees.setForeground(new java.awt.Color(0, 0, 0));
-        tblEmployees.setModel(new javax.swing.table.DefaultTableModel(
+        tblUser.setBackground(new java.awt.Color(255, 255, 255));
+        tblUser.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        tblUser.setForeground(new java.awt.Color(0, 0, 0));
+        tblUser.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Id", "Nombre"
+                "Id", "Nombre", "Contraseña"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -88,11 +130,23 @@ public class FrmSearchUser extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        tblEmployees.setGridColor(new java.awt.Color(0, 0, 0));
-        tblEmployees.setSelectionBackground(new java.awt.Color(234, 231, 203));
-        jScrollPane1.setViewportView(tblEmployees);
+        tblUser.setGridColor(new java.awt.Color(0, 0, 0));
+        tblUser.setSelectionBackground(new java.awt.Color(234, 231, 203));
+        jScrollPane1.setViewportView(tblUser);
 
-        jButton1.setText("jButton1");
+        btnsearch.setText("Buscar");
+        btnsearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsearchActionPerformed(evt);
+            }
+        });
+
+        btnCancel.setText("Cancelar");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -109,17 +163,17 @@ public class FrmSearchUser extends javax.swing.JDialog {
                                 .addGap(204, 204, 204)
                                 .addComponent(jLabel1))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(236, 236, 236)
-                                .addComponent(jButton1)))
+                                .addContainerGap()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtIdUser, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(221, 221, 221)))
+                .addGap(138, 138, 138)
+                .addComponent(btnsearch)
+                .addGap(85, 85, 85)
+                .addComponent(btnCancel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -130,11 +184,13 @@ public class FrmSearchUser extends javax.swing.JDialog {
                 .addGap(27, 27, 27)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtIdUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnsearch)
+                    .addComponent(btnCancel))
                 .addGap(41, 41, 41))
         );
 
@@ -151,6 +207,19 @@ public class FrmSearchUser extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void btnsearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsearchActionPerformed
+        int selectedRow = tblUser.getSelectedRow();
+        if (selectedRow == -1) {
+            return;
+        }
+        int id = (int) tblUser.getValueAt(selectedRow, 0);
+        frmUser.show(ents.stream().filter(user -> user.getId() == id).findFirst().orElse(null));
+        this.dispose();        this.dispose();    }//GEN-LAST:event_btnsearchActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,12 +264,14 @@ public class FrmSearchUser extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnsearch;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTable tblEmployees;
+    private javax.swing.JTable tblUser;
+    private javax.swing.JTextField txtIdUser;
     // End of variables declaration//GEN-END:variables
+
 }

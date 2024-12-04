@@ -104,6 +104,11 @@ public class FrmShearchCrops extends javax.swing.JDialog {
 
         txtType.setBackground(new java.awt.Color(255, 255, 255));
         txtType.setForeground(new java.awt.Color(0, 0, 0));
+        txtType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTypeActionPerformed(evt);
+            }
+        });
         txtType.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtTypeKeyReleased(evt);
@@ -267,6 +272,10 @@ public class FrmShearchCrops extends javax.swing.JDialog {
             sorter.setRowFilter(RowFilter.regexFilter("(?i)" + searchText));
         }
     }//GEN-LAST:event_cbxStateMouseClicked
+
+    private void txtTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTypeActionPerformed
 
     /**
      * @param args the command line arguments
