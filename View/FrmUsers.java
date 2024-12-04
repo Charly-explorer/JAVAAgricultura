@@ -79,9 +79,9 @@ public class FrmUsers extends javax.swing.JInternalFrame implements IView<Users>
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
-        txtContrasennia2 = new javax.swing.JTextField();
         btnAgregar = new javax.swing.JButton();
         txtNombre = new javax.swing.JTextField();
+        txtContrasennia2 = new javax.swing.JPasswordField();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -94,35 +94,53 @@ public class FrmUsers extends javax.swing.JInternalFrame implements IView<Users>
             .addGap(0, 468, Short.MAX_VALUE)
         );
 
-        setBackground(new java.awt.Color(234, 231, 203));
+        setBackground(new java.awt.Color(255, 241, 203));
         setClosable(true);
         setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel1.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Id ");
 
         jLabel2.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Nombre");
 
         jLabel3.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Usuarios");
 
         jLabel4.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Contraseña");
 
+        txtId.setBackground(new java.awt.Color(255, 255, 255));
         txtId.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-
-        txtContrasennia2.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        txtId.setForeground(new java.awt.Color(0, 0, 0));
 
         btnAgregar.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        btnAgregar.setForeground(new java.awt.Color(0, 0, 0));
+        btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/agre46.png"))); // NOI18N
         btnAgregar.setText("Agregar");
+        btnAgregar.setBorderPainted(false);
+        btnAgregar.setContentAreaFilled(false);
+        btnAgregar.setDefaultCapable(false);
+        btnAgregar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnAgregar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/agre46.png"))); // NOI18N
+        btnAgregar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarActionPerformed(evt);
             }
         });
 
+        txtNombre.setBackground(new java.awt.Color(255, 255, 255));
         txtNombre.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        txtNombre.setForeground(new java.awt.Color(0, 0, 0));
+
+        txtContrasennia2.setBackground(new java.awt.Color(255, 255, 255));
+        txtContrasennia2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtContrasennia2.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -131,20 +149,20 @@ public class FrmUsers extends javax.swing.JInternalFrame implements IView<Users>
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(231, 231, 231)
+                        .addComponent(jLabel3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(219, 219, 219)
+                        .addComponent(btnAgregar))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(53, 53, 53)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel2)
                             .addComponent(jLabel1)
                             .addComponent(jLabel4)
-                            .addComponent(txtContrasennia2, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
-                            .addComponent(txtId)
-                            .addComponent(txtNombre)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(231, 231, 231)
-                        .addComponent(jLabel3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(222, 222, 222)
-                        .addComponent(btnAgregar)))
+                            .addComponent(txtId, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
+                            .addComponent(txtNombre)
+                            .addComponent(txtContrasennia2))))
                 .addContainerGap(61, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -162,11 +180,11 @@ public class FrmUsers extends javax.swing.JInternalFrame implements IView<Users>
                 .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19)
                 .addComponent(jLabel4)
-                .addGap(10, 10, 10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtContrasennia2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addComponent(btnAgregar)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addGap(26, 26, 26))
         );
 
         pack();
@@ -190,7 +208,7 @@ public class FrmUsers extends javax.swing.JInternalFrame implements IView<Users>
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField txtContrasennia2;
+    private javax.swing.JPasswordField txtContrasennia2;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables

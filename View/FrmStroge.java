@@ -120,16 +120,24 @@ public class FrmStroge extends javax.swing.JInternalFrame implements IView<Store
 
         setClosable(true);
 
+        jPanel1.setBackground(new java.awt.Color(255, 241, 203));
+
         jLabel1.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
-        jLabel1.setText("Alamacenamiento");
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/granero(2).png"))); // NOI18N
+        jLabel1.setText("ALMACENAMIENTO");
 
         jLabel2.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Id Produccion");
 
         jLabel3.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Cantidad");
 
+        txtIdProduction.setBackground(new java.awt.Color(255, 255, 255));
         txtIdProduction.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        txtIdProduction.setForeground(new java.awt.Color(0, 0, 0));
         txtIdProduction.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtIdProductionMouseClicked(evt);
@@ -137,16 +145,34 @@ public class FrmStroge extends javax.swing.JInternalFrame implements IView<Store
         });
 
         txtIdAmount.setEditable(false);
+        txtIdAmount.setBackground(new java.awt.Color(255, 255, 255));
         txtIdAmount.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        txtIdAmount.setForeground(new java.awt.Color(0, 0, 0));
 
-        btnAgregar.setText("Agregar");
+        btnAgregar.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        btnAgregar.setForeground(new java.awt.Color(0, 0, 0));
+        btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/guardar48.png"))); // NOI18N
+        btnAgregar.setText("Guaradar");
+        btnAgregar.setBorderPainted(false);
+        btnAgregar.setContentAreaFilled(false);
+        btnAgregar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnAgregar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/agre.png"))); // NOI18N
+        btnAgregar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarActionPerformed(evt);
             }
         });
 
+        btnSearch.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        btnSearch.setForeground(new java.awt.Color(0, 0, 0));
+        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/search44.png"))); // NOI18N
         btnSearch.setText("Buscar");
+        btnSearch.setBorderPainted(false);
+        btnSearch.setContentAreaFilled(false);
+        btnSearch.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnSearch.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/serac64.png"))); // NOI18N
+        btnSearch.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchActionPerformed(evt);
@@ -154,26 +180,49 @@ public class FrmStroge extends javax.swing.JInternalFrame implements IView<Store
         });
 
         txtEntryDate.setEditable(false);
+        txtEntryDate.setBackground(new java.awt.Color(255, 255, 255));
+        txtEntryDate.setForeground(new java.awt.Color(0, 0, 0));
         txtEntryDate.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
 
         jLabel4.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Fecha de entrada");
 
         jLabel5.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Fecha de salida");
 
         txtDepartureDate.setEditable(false);
+        txtDepartureDate.setBackground(new java.awt.Color(255, 255, 255));
+        txtDepartureDate.setForeground(new java.awt.Color(0, 0, 0));
         txtDepartureDate.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
 
+        btnUpdate.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        btnUpdate.setForeground(new java.awt.Color(0, 0, 0));
+        btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/actu.png"))); // NOI18N
         btnUpdate.setText("Despachar");
+        btnUpdate.setBorderPainted(false);
+        btnUpdate.setContentAreaFilled(false);
+        btnUpdate.setDefaultCapable(false);
         btnUpdate.setEnabled(false);
+        btnUpdate.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnUpdate.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/actu64 (2).png"))); // NOI18N
+        btnUpdate.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUpdateActionPerformed(evt);
             }
         });
 
+        txtClear.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        txtClear.setForeground(new java.awt.Color(0, 0, 0));
+        txtClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/agre46.png"))); // NOI18N
         txtClear.setText("Nuevo");
+        txtClear.setBorderPainted(false);
+        txtClear.setContentAreaFilled(false);
+        txtClear.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        txtClear.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/agre.png"))); // NOI18N
+        txtClear.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         txtClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtClearActionPerformed(evt);
@@ -186,47 +235,44 @@ public class FrmStroge extends javax.swing.JInternalFrame implements IView<Store
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel3)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(205, 205, 205)
-                            .addComponent(jLabel1)
-                            .addGap(42, 42, 42)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(300, 300, 300)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel5)
+                                .addComponent(txtIdAmount, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                                .addComponent(txtDepartureDate))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(btnSearch)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnUpdate))
-                            .addComponent(jLabel5)
-                            .addComponent(txtIdAmount, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
-                            .addComponent(txtDepartureDate))))
-                .addGap(0, 40, Short.MAX_VALUE))
+                                .addGap(44, 44, 44)
+                                .addComponent(btnUpdate))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(txtClear)
+                                    .addGap(67, 67, 67)
+                                    .addComponent(btnAgregar))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtIdProduction, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(txtEntryDate))))))
+                .addContainerGap(58, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtClear)
-                                .addGap(67, 67, 67)
-                                .addComponent(btnAgregar))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtIdProduction, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
-                                .addComponent(jLabel4)
-                                .addComponent(txtEntryDate)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(179, 179, 179)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(15, 15, 15)
                 .addComponent(jLabel1)
-                .addGap(43, 43, 43)
+                .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
@@ -246,9 +292,11 @@ public class FrmStroge extends javax.swing.JInternalFrame implements IView<Store
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregar)
                     .addComponent(btnSearch)
-                    .addComponent(btnUpdate)
-                    .addComponent(txtClear))
-                .addContainerGap(43, Short.MAX_VALUE))
+                    .addComponent(txtClear)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnUpdate)
+                        .addGap(2, 2, 2)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
