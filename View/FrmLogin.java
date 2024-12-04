@@ -3,23 +3,46 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package View;
+
 import Controller.UsersController;
+import java.sql.SQLException;
+import Model.Users.Login;
 import java.awt.Graphics;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author zulay
  */
 public class FrmLogin extends javax.swing.JFrame {
+
     private UsersController controller;
+    FrmMenu menu;
+    private Login login;
 
     /**
      * Creates new form FrmLogin
      */
     public FrmLogin() {
         initComponents();
-        this.controller  = new UsersController((IView)this);
+//        this.controller  = new UsersController((IView)this);
+        menu = new FrmMenu();
+        try {
+            this.login = new Login(DataBase.DataBase.getConnetion());
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Error al conectar con la Base de Datos", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public int login() {
+        if (!txtUser.getText().isEmpty() && !txtPasword.getText().isEmpty()) {
+            return login.validateLogin(txtUser.getText(), txtPasword.getText());
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor, ingresa tu nombre de usuario y contraseña",
+                    "Campos Vacíos", JOptionPane.WARNING_MESSAGE);
+            return -1;
+        }
     }
 
     /**
@@ -133,7 +156,12 @@ public class FrmLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-      
+        if (login() > 0) {
+            menu.setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Las credenciales no son correctas", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
