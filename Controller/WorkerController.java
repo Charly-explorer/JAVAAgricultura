@@ -36,7 +36,7 @@ public class WorkerController {
             return;
         }
         try {
-            if (validatePK(worker.getIdCard())) {
+            if (!validatePK(worker.getIdCard())) {
                 view.showError("El ID del trabajador ya está ingresado");
                 return;
             }

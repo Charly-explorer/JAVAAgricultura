@@ -91,7 +91,7 @@ public class FrmLogin extends javax.swing.JFrame {
 
         btnLogin.setBackground(new java.awt.Color(12, 84, 12));
         btnLogin.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
-        btnLogin.setText("Iniciar Seccion");
+        btnLogin.setText("Iniciar Sesion");
         btnLogin.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -57,7 +57,7 @@ public class WorkersDao extends DaoAll<WorkersDTO> {
         }
         String query = "Call WorkersCreate(?,?,?,?,?,?,?,?,?,?)";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {           
-            stmt.setInt(1, 1);
+            stmt.setInt(1, dto.getId());
             stmt.setString(2, dto.getName());
             stmt.setString(3, dto.getLastName1());
             stmt.setString(4, dto.getLastName2());
