@@ -237,6 +237,11 @@ public class FrmCrops extends javax.swing.JInternalFrame implements IView<Crop>{
         txtSowing.setEditable(false);
         txtSowing.setBackground(new java.awt.Color(255, 255, 255));
         txtSowing.setForeground(new java.awt.Color(0, 0, 0));
+        txtSowing.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSowingActionPerformed(evt);
+            }
+        });
 
         txtHarvest.setEditable(false);
         txtHarvest.setBackground(new java.awt.Color(255, 255, 255));
@@ -470,6 +475,10 @@ public class FrmCrops extends javax.swing.JInternalFrame implements IView<Crop>{
     private void txtNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameKeyReleased
         txtState.setText("Siembra");
     }//GEN-LAST:event_txtNameKeyReleased
+
+    private void txtSowingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSowingActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSowingActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

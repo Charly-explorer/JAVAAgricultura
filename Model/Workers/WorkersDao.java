@@ -27,13 +27,13 @@ public class WorkersDao extends DaoAll<WorkersDTO> {
         }
         String query = "Call WorkersUpdate(?,?,?,?,?,?)";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setString(1, dto.getTelephone());
-            stmt.setString(2, dto.getEmail());
-            stmt.setString(3, dto.getIdCard());
-            stmt.setString(4, dto.getPosition());
-            stmt.setString(5, dto.getSchedule());
-            stmt.setDouble(6, dto.getSalary());
-            return stmt.executeUpdate() > 0;
+            stmt.setString(1, dto.getTelephone()); // Teléfono
+            stmt.setString(2, dto.getEmail());     // Email
+            stmt.setString(3, dto.getPosition()); // Posición
+            stmt.setString(4, dto.getSchedule()); // Horario
+            stmt.setDouble(5, dto.getSalary());
+            stmt.setString(6, dto.getIdCard());// Salario
+            return stmt.executeUpdate() > 0; 
         }
     }
 
@@ -42,7 +42,7 @@ public class WorkersDao extends DaoAll<WorkersDTO> {
         if (id == null || String.valueOf(id).trim().isEmpty()) {
             return false;
         }
-        String query = "Call WorkesDelete(?)";
+        String query = "Call WorkersDelete(?)";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, String.valueOf(id));
             return stmt.executeUpdate() > 0;
@@ -82,7 +82,7 @@ public class WorkersDao extends DaoAll<WorkersDTO> {
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     return new WorkersDTO(
-                            rs.getString(1),
+                            rs.getInt(1),
                             rs.getString(2),
                             rs.getString(3),
                             rs.getString(4),
@@ -90,7 +90,8 @@ public class WorkersDao extends DaoAll<WorkersDTO> {
                             rs.getString(6),
                             rs.getString(7),
                             rs.getString(8),
-                            rs.getDouble(9));
+                            rs.getString(9),
+                            rs.getDouble(10));
 
                 }
             }
@@ -106,15 +107,16 @@ public class WorkersDao extends DaoAll<WorkersDTO> {
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     list.add(new WorkersDTO(
-                     rs.getString(1),
-                     rs.getString(2),
-                     rs.getString(3),
-                     rs.getString(4),
-                     rs.getString(5),
-                     rs.getString(6),
-                     rs.getString(7),
-                     rs.getString(8),
-                     rs.getDouble(9)));
+                     rs.getInt(1),
+                            rs.getString(2),
+                            rs.getString(3),
+                            rs.getString(4),
+                            rs.getString(5),
+                            rs.getString(6),
+                            rs.getString(7),
+                            rs.getString(8),
+                            rs.getString(9),
+                            rs.getDouble(10)));
                     
                 }
             }

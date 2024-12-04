@@ -6,6 +6,8 @@ package View;
 
 import Controller.WorkerController;
 import Model.Workers.Workers;
+import Model.Workers.WorkersDTO;
+import Model.Workers.WorkersDao;
 import Utils.UtilGui;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -122,6 +124,8 @@ return UtilGui.validateFields(txtIdCard, txtName, txtLastName1, txtLastName2, tx
         txtSchedule = new javax.swing.JTextField();
         btnSave = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        btnUpDate = new javax.swing.JButton();
 
         jTextField6.setText("jTextField6");
 
@@ -173,44 +177,61 @@ return UtilGui.validateFields(txtIdCard, txtName, txtLastName1, txtLastName2, tx
             }
         });
 
+        btnDelete.setText("Eliminar");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        btnUpDate.setText("Actualizar");
+        btnUpDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpDateActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(23, 23, 23)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel1)
-                                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel10)
-                                .addComponent(txtSchedule, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel4)
-                                .addComponent(txtLastName1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel6)
-                                .addComponent(txtTelephone, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel8)
-                                .addComponent(txtPosition, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(29, 29, 29)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel2)
-                                .addComponent(txtIdCard, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel7)
-                                .addComponent(jLabel9)
-                                .addComponent(txtLastName2)
-                                .addComponent(txtEmail)
-                                .addComponent(txtSalary))))
+                .addGap(23, 23, 23)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(177, 177, 177)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel10)
+                            .addComponent(txtSchedule, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)
+                            .addComponent(txtLastName1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6)
+                            .addComponent(txtTelephone, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8)
+                            .addComponent(txtPosition, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel2)
+                            .addComponent(txtIdCard, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel9)
+                            .addComponent(txtLastName2)
+                            .addComponent(txtEmail)
+                            .addComponent(txtSalary)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
                         .addComponent(btnSave)
-                        .addGap(107, 107, 107)
-                        .addComponent(jButton2)))
-                .addContainerGap(28, Short.MAX_VALUE))
+                        .addGap(42, 42, 42)
+                        .addComponent(jButton2)
+                        .addGap(72, 72, 72)
+                        .addComponent(btnDelete)
+                        .addGap(62, 62, 62)
+                        .addComponent(btnUpDate)))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -263,7 +284,9 @@ return UtilGui.validateFields(txtIdCard, txtName, txtLastName1, txtLastName2, tx
                         .addGap(113, 113, 113)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnSave)
-                            .addComponent(jButton2))))
+                            .addComponent(jButton2)
+                            .addComponent(btnDelete)
+                            .addComponent(btnUpDate))))
                 .addContainerGap(56, Short.MAX_VALUE))
         );
 
@@ -271,7 +294,10 @@ return UtilGui.validateFields(txtIdCard, txtName, txtLastName1, txtLastName2, tx
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -293,57 +319,80 @@ return UtilGui.validateFields(txtIdCard, txtName, txtLastName1, txtLastName2, tx
     }//GEN-LAST:event_txtLastName1ActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-if (!validateRequired()) { // Valida que todos los campos requeridos estén llenos
-        showError("Todos los campos son obligatorios. Por favor, complete los datos.");
-        return;
-    }
-
-    try {
-        // Obtener datos del formulario
-        String idCard = txtIdCard.getText().trim();
-        String name = txtName.getText().trim();
-        String lastName1 = txtLastName1.getText().trim();
-        String lastName2 = txtLastName2.getText().trim();
-        String telephone = txtTelephone.getText().trim();
-        String email = txtEmail.getText().trim();
-        String schedule = txtSchedule.getText().trim();
-        String position = txtPosition.getText().trim();
-        double salary= Double.parseDouble(txtSalary.getText());
+        if (!validateRequired()) { // Valida que todos los campos requeridos estén llenos
+            showError("Todos los campos son obligatorios. Por favor, complete los datos.");
+            return;
+        }
 
         try {
-            salary = Double.parseDouble(txtSalary.getText());
-        } catch (NumberFormatException e) {
-            showError("El salario debe ser un número válido.");
-            return;
-        }
+            // Obtener datos del formulario
+            String idCard = txtIdCard.getText().trim();
+            String name = txtName.getText().trim();
+            String lastName1 = txtLastName1.getText().trim();
+            String lastName2 = txtLastName2.getText().trim();
+            String telephone = txtTelephone.getText().trim();
+            String email = txtEmail.getText().trim();
+            String schedule = txtSchedule.getText().trim();
+            String position = txtPosition.getText().trim();
+            double salary = Double.parseDouble(txtSalary.getText());
 
-        // Crear objeto Workers con los datos del formulario
-        Workers worker = new Workers(idCard, name, lastName1, lastName2, telephone, email, position, schedule, salary);
+            try {
+                salary = Double.parseDouble(txtSalary.getText());
+            } catch (NumberFormatException e) {
+                showError("El salario debe ser un número válido.");
+                return;
+            }
 
-        // Validar campos específicos
-        if (!worker.validarCorreo(email)) {
-            showError("El correo electrónico no tiene un formato válido.");
-            return;
-        }
-        if (!worker.validarTelefono(telephone)) {
-            showError("El número de teléfono debe contener 8 dígitos.");
-            return;
-        }
+            // Crear objeto Workers con los datos del formulario
+            int id = Integer.parseInt(txtId.getText());
+            Workers worker = new Workers(id, idCard, name, lastName1, lastName2, telephone, email, position, schedule, salary);
 
-        // Intentar guardar el trabajador a través del controlador
-        controller.create(worker);
-        clear(); // Limpia los campos después de guardar
-    } catch (Exception ex) {
-        showError("Ocurrió un error al intentar guardar los datos: " + ex.getMessage());
+            // Validar campos específicos
+            if (!worker.validarCorreo(email)) {
+                showError("El correo electrónico no tiene un formato válido.");
+                return;
+            }
+            if (!worker.validarTelefono(telephone)) {
+                showError("El número de teléfono debe contener 8 dígitos.");
+                return;
+            }
+
+            // Intentar guardar el trabajador a través del controlador
+            controller.create(worker);
+            clear(); // Limpia los campos después de guardar
+        } catch (Exception ex) {
+            showError("Ocurrió un error al intentar guardar los datos: " + ex.getMessage());
     }    }//GEN-LAST:event_btnSaveActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       controller.readAll();
+        controller.readAll();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+         if (worker==null){
+            showError("No hay ningun trabajardor para eliminar");
+            return;
+        }
+        int option = JOptionPane.showConfirmDialog(
+            this, 
+            "¿Está seguro que desea eliminar el cultivo actual?",
+            "Confirmar Eliminación", 
+            JOptionPane.YES_NO_OPTION
+        );
+        if(option==JOptionPane.NO_OPTION) return;
+        controller.delete(worker);
+        clear();
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnUpDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpDateActionPerformed
+   
+    }//GEN-LAST:event_btnUpDateActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnUpDate;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

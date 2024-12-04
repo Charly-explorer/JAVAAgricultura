@@ -41,13 +41,16 @@ public class FrmSearchWorkers extends javax.swing.JDialog {
 
         ents.forEach(worker -> tableModel.addRow(
                 new Object[]{
+                        worker.getId(),
                         worker.getIdCard(),
                         worker.getName(),
+                        worker.getLastName1(),
+                        worker.getLastName2(),
                         worker.getTelephone(),
                         worker.getEmail(),
                         worker.getPosition(),
-                        worker.getSchedule(),
-                        worker.getSalary()
+                        worker.getSalary(),
+                        worker.getSchedule()
                 }
         ));
     }
@@ -87,26 +90,26 @@ public class FrmSearchWorkers extends javax.swing.JDialog {
         tblWorkers.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         tblWorkers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Identificacion", "Nombre", "Telefono", "Correo", "Puesto ", "Horario", "Salario"
+                "Identificacion", "Cedula", "Nombre", "Apellido1", "Apellido2", "Telefono", "Correo", "Puesto ", "Salario", "Horario"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, true, false, true, true, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -129,7 +132,7 @@ public class FrmSearchWorkers extends javax.swing.JDialog {
         jLabel2.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
         jLabel2.setText("Busqueda de Trabajadores");
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Seleccionar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -156,7 +159,7 @@ public class FrmSearchWorkers extends javax.swing.JDialog {
                             .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(320, 320, 320)
+                        .addGap(131, 131, 131)
                         .addComponent(jButton1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -171,9 +174,9 @@ public class FrmSearchWorkers extends javax.swing.JDialog {
                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addGap(41, 41, 41))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -191,7 +194,11 @@ public class FrmSearchWorkers extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+       int selectedRow = tblWorkers.getSelectedRow();
+        if (selectedRow==-1) return;
+        int id = (int) tblWorkers.getValueAt(selectedRow, 0);
+        frmWorkers.show(ents.stream().filter(workers -> workers.getId()== id).findFirst().orElse(null));
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
  * @author carlo
  */
 public class Workers {
+    private int id;
     private String idCard;
     private String name;
     private String lastName1;
@@ -16,6 +17,10 @@ public class Workers {
     private String position;
     private String schedule;
     private double salary;
+
+    public int getId() {
+        return id;
+    }
 
     public String getIdCard() {
         return idCard;
@@ -73,7 +78,8 @@ public class Workers {
         this.salary = salary;
     }
 
-    public Workers(String idCard, String name, String lastName1, String lastName2, String telephone, String email, String position, String schedule, double salary) {
+    public Workers(int id, String idCard, String name, String lastName1, String lastName2, String telephone, String email, String position, String schedule, double salary) {
+        this.id = id;
         this.idCard = idCard;
         this.name = name;
         this.lastName1 = lastName1;
@@ -84,6 +90,9 @@ public class Workers {
         this.schedule = schedule;
         this.salary = salary;
     }
+    
+
+  
       public boolean validarCorreo(String email){
        if(email==null) return false;
        String formato="^[a-zA-Z0-9+&-]+(?:\\.[a-zA-Z0-9+&-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";

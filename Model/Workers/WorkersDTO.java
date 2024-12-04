@@ -5,6 +5,7 @@ package Model.Workers;
  * @author carlo
  */
 public class WorkersDTO {
+    private final int id;
     private final String idCard;
     private final String name;
     private final String lastName1;
@@ -14,6 +15,10 @@ public class WorkersDTO {
     private final String position;
     private final String schedule;
     private final double salary;
+
+    public int getId() {
+        return id;
+    }
 
   
 
@@ -53,7 +58,8 @@ public class WorkersDTO {
         return salary;
     }
 
-    public WorkersDTO(String idCard, String name, String lastName1, String lastName2, String telephone, String email, String position, String schedule, double salary) {
+    public WorkersDTO(int id, String idCard, String name, String lastName1, String lastName2, String telephone, String email, String position, String schedule, double salary) {
+        this.id = id;
         this.idCard = idCard;
         this.name = name;
         this.lastName1 = lastName1;
@@ -64,6 +70,8 @@ public class WorkersDTO {
         this.schedule = schedule;
         this.salary = salary;
     }
+
+   
     
     
     

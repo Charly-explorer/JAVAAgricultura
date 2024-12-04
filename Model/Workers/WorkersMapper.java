@@ -15,6 +15,7 @@ public class WorkersMapper implements Mapper<Workers,WorkersDTO> {
     @Override
     public WorkersDTO toDto(Workers ent) {
         return new WorkersDTO(
+                ent.getId(),
                 ent.getIdCard(),//idCard,
                 ent.getName(),//name,
                 ent.getLastName1(),//lastName1,
@@ -30,6 +31,7 @@ public class WorkersMapper implements Mapper<Workers,WorkersDTO> {
     @Override
     public Workers toEnt(WorkersDTO dto) {
         return new Workers(
+                dto.getId(),
                 dto.getIdCard(),//idCard,
                 dto.getName(),//name,
                 dto.getLastName1(),//lastName1,
