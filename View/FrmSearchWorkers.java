@@ -85,11 +85,13 @@ public class FrmSearchWorkers extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(234, 231, 203));
+        jPanel1.setBackground(new java.awt.Color(255, 241, 203));
 
         jScrollPane1.setBackground(new java.awt.Color(217, 246, 248));
 
+        tblWorkers.setBackground(new java.awt.Color(255, 255, 255));
         tblWorkers.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        tblWorkers.setForeground(new java.awt.Color(0, 0, 0));
         tblWorkers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null},
@@ -123,13 +125,16 @@ public class FrmSearchWorkers extends javax.swing.JDialog {
             }
         });
         tblWorkers.setGridColor(new java.awt.Color(0, 0, 0));
-        tblWorkers.setSelectionBackground(new java.awt.Color(234, 231, 203));
+        tblWorkers.setSelectionBackground(new java.awt.Color(255, 241, 203));
         jScrollPane1.setViewportView(tblWorkers);
 
         jLabel1.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Tarjeta de Identificacion");
 
+        txtId.setBackground(new java.awt.Color(255, 255, 255));
         txtId.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        txtId.setForeground(new java.awt.Color(0, 0, 0));
         txtId.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtIdKeyReleased(evt);
@@ -137,16 +142,35 @@ public class FrmSearchWorkers extends javax.swing.JDialog {
         });
 
         jLabel2.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/red.png"))); // NOI18N
         jLabel2.setText("Busqueda de Trabajadores");
 
+        btnSearch.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        btnSearch.setForeground(new java.awt.Color(0, 0, 0));
+        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/search44.png"))); // NOI18N
         btnSearch.setText("Buscar");
+        btnSearch.setBorderPainted(false);
+        btnSearch.setContentAreaFilled(false);
+        btnSearch.setDefaultCapable(false);
+        btnSearch.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnSearch.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/serac64.png"))); // NOI18N
+        btnSearch.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchActionPerformed(evt);
             }
         });
 
+        btnCancel.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        btnCancel.setForeground(new java.awt.Color(0, 0, 0));
+        btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/cancel48.png"))); // NOI18N
         btnCancel.setText("Cancelar");
+        btnCancel.setBorderPainted(false);
+        btnCancel.setContentAreaFilled(false);
+        btnCancel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCancel.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/cancel.png"))); // NOI18N
+        btnCancel.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelActionPerformed(evt);
@@ -158,26 +182,28 @@ public class FrmSearchWorkers extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 686, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(198, 198, 198)
                 .addComponent(jLabel2)
-                .addGap(260, 260, 260))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)))
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 686, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(131, 131, 131)
-                        .addComponent(btnSearch)
-                        .addGap(127, 127, 127)
-                        .addComponent(btnCancel)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel1)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(183, 183, 183)
+                                .addComponent(btnSearch)
+                                .addGap(137, 137, 137)
+                                .addComponent(btnCancel)))
+                        .addGap(0, 228, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,7 +220,7 @@ public class FrmSearchWorkers extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSearch)
                     .addComponent(btnCancel))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
