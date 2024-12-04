@@ -44,7 +44,7 @@ public class FrmProduction extends javax.swing.JInternalFrame implements IView<P
             clear();
             return;
         }
-        txtId.setText(String.valueOf(ent.getId()));
+        //txtId.setText(String.valueOf(ent.getId()));
         txtCrop.setText(String.valueOf(ent.getCrop().getId()));
         formatDate(ent.getDate(), txtDate);
         txtAmount.setValue(ent.getAmount());
@@ -75,7 +75,7 @@ public class FrmProduction extends javax.swing.JInternalFrame implements IView<P
 
     @Override
     public boolean validateRequired() {
-        return UtilGui.validateFields(txtId,txtCrop,txtDate,
+        return UtilGui.validateFields(txtCrop,txtDate,
                 txtPorcent,txtDestiny);
     }
     
@@ -88,7 +88,7 @@ public class FrmProduction extends javax.swing.JInternalFrame implements IView<P
     }
     
     private void clear() {
-        UtilGui.clearTxts(txtId,
+        UtilGui.clearTxts(
                 txtCrop,
                 txtDate,
                 txtPorcent,
@@ -97,7 +97,7 @@ public class FrmProduction extends javax.swing.JInternalFrame implements IView<P
     }
     
     private void SetEditableStateTxts(boolean value){
-        txtId.setEditable(value);
+        //txtId.setEditable(value);
         txtCrop.setEditable(value);
         txtDate.setEditable(value);
         txtAmount.setValue(0);
@@ -116,7 +116,14 @@ public class FrmProduction extends javax.swing.JInternalFrame implements IView<P
     public int getJSpinerValue(javax.swing.JSpinner txt){
         return Integer.parseUnsignedInt(String.valueOf(txt.getValue()));
     }
+    
+    public Production getProduction(){
+        return production;
+    }
 
+    public ProductionController getController(){
+        return controller;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -128,14 +135,12 @@ public class FrmProduction extends javax.swing.JInternalFrame implements IView<P
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        txtId = new javax.swing.JTextField();
         txtCrop = new javax.swing.JTextField();
         txtPorcent = new javax.swing.JTextField();
         txtDestiny = new javax.swing.JTextField();
@@ -146,11 +151,10 @@ public class FrmProduction extends javax.swing.JInternalFrame implements IView<P
         txtAmount = new javax.swing.JSpinner();
         txtAmountProduction = new javax.swing.JSpinner();
 
+        setClosable(true);
+
         jLabel1.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
         jLabel1.setText("Producion");
-
-        jLabel2.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
-        jLabel2.setText("Id ");
 
         jLabel3.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
         jLabel3.setText("Cultivo");
@@ -169,8 +173,6 @@ public class FrmProduction extends javax.swing.JInternalFrame implements IView<P
 
         jLabel8.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
         jLabel8.setText("Destino");
-
-        txtId.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
 
         txtCrop.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         txtCrop.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -244,10 +246,8 @@ public class FrmProduction extends javax.swing.JInternalFrame implements IView<P
                             .addComponent(jLabel4)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel2)
-                                    .addComponent(txtId, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
                                     .addComponent(jLabel6)
-                                    .addComponent(txtDate)
+                                    .addComponent(txtDate, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
                                     .addComponent(txtAmountProduction))
                                 .addGap(64, 64, 64)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -270,19 +270,12 @@ public class FrmProduction extends javax.swing.JInternalFrame implements IView<P
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
-                        .addComponent(jLabel2))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3)))
+                .addGap(24, 24, 24)
+                .addComponent(jLabel1)
+                .addGap(36, 36, 36)
+                .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCrop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txtCrop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -342,9 +335,12 @@ public class FrmProduction extends javax.swing.JInternalFrame implements IView<P
             return;
         }
         production = new Production(
-                Integer.parseInt(txtId.getText()), 
-                crop, getJSpinerValue(txtAmount)
-                , getJSpinerValue(txtAmountProduction), txtDestiny.getText());
+                1, 
+                crop,
+                getJSpinerValue(txtAmount)
+                , getJSpinerValue(txtAmountProduction), 
+                txtDestiny.getText()
+        );
         controller.create(production);
         txtPorcent.setText(String.valueOf(production.getPercentProduction()));
         this.SetEditableStateTxts(false);
@@ -377,7 +373,6 @@ public class FrmProduction extends javax.swing.JInternalFrame implements IView<P
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSearch;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -390,7 +385,6 @@ public class FrmProduction extends javax.swing.JInternalFrame implements IView<P
     private javax.swing.JTextField txtCrop;
     private javax.swing.JFormattedTextField txtDate;
     private javax.swing.JTextField txtDestiny;
-    private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtPorcent;
     // End of variables declaration//GEN-END:variables
 }

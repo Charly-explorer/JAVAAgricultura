@@ -24,7 +24,7 @@ public class StoreroomsDAO extends DaoUpdate<StoreroomsDTO> {
         if (dto == null) {
             return false;
         }
-        String query = "Call StoreroomsUpdate(?,?,?,?,?)";
+        String query = "Call StorageUpdate(?,?,?,?,?)";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setInt(1, dto.getIdProduccion());
             stmt.setDouble(2, dto.getIdQuantity());
@@ -40,7 +40,7 @@ public class StoreroomsDAO extends DaoUpdate<StoreroomsDTO> {
         if (dto == null || !validatePk(dto.getIdProduccion())) {
             return false;
         }
-        String query = "Call storeroomsCreate(?,?,?)";
+        String query = "Call StorageCreate(?,?,?,?,?)";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
              stmt.setInt(1, dto.getIdProduccion());
             stmt.setDouble(2, dto.getIdQuantity());
@@ -56,7 +56,7 @@ public class StoreroomsDAO extends DaoUpdate<StoreroomsDTO> {
 if (id == null || String.valueOf(id).trim().isEmpty()) {
             return null;
         }
-        String query = "Call StoreroomsRead(?)";
+        String query = "Call StorageRead(?)";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, String.valueOf(id));
             try (ResultSet rs = stmt.executeQuery()) {
@@ -76,7 +76,7 @@ if (id == null || String.valueOf(id).trim().isEmpty()) {
 
     @Override
     public List<StoreroomsDTO> readAll() throws SQLException {
-String query = "Call CustomerReadAll()";
+String query = "Call StorageReadAll()";
         List<StoreroomsDTO> list = new ArrayList<>();
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             try (ResultSet rs = stmt.executeQuery()) {

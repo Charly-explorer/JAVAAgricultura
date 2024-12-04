@@ -36,11 +36,10 @@ public class WorkerController {
             return;
         }
         try {
-            if (!validatePK(worker.getIdCard())) {
+            if (validatePK(worker.getIdCard())) {
                 view.showError("El ID del trabajador ya está ingresado");
                 return;
             }
-            System.out.println(worker.getIdCard());//------------------------------------
             workerDao.create(mapper.toDto(worker));
             view.showMessage("Datos guardados correctamente");
         } catch (SQLException ex) {

@@ -4,20 +4,60 @@
  */
 package View;
 
+import Model.Storerooms.Storerooms;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+
 /**
  *
  * @author zulay
  */
 public class FRmSearchStroge extends javax.swing.JDialog {
 
+    List<Storerooms> list;
+    private IView frmStorage;
+    private DefaultTableModel tableModel;
+    TableRowSorter<TableModel> sorter;
+    
     /**
      * Creates new form FRmSearchStroge
      */
     public FRmSearchStroge(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        tableModel = (DefaultTableModel) tblEmployees.getModel();
+        sorter = new TableRowSorter<>(this.tblEmployees.getModel());
+        tblEmployees.setRowSorter(sorter);
     }
-
+    
+    public void setFrmStorage(IView frmStorage){
+        this.frmStorage = frmStorage;
+    }
+    
+    public void setList(List<Storerooms> list) {
+        this.list = list;
+        if (list == null || tableModel == null) return;
+        tableModel.setNumRows(0);
+        
+        list.forEach(storage -> tableModel.addRow(
+                new Object[]{
+                    storage.getIdProduccion(),
+                    storage.getIdQuantity(),
+                    formatDate(storage.getEntryDate()),
+                    formatDate(storage.getDepartureDate())
+                }
+        ));
+    }
+    
+    public String formatDate(LocalDate date){
+        if(date == null)
+            return "";
+        return date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

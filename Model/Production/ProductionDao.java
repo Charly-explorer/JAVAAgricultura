@@ -16,7 +16,7 @@ import java.util.List;
  *
  * @author Johel M
  */
-public class ProductionDao extends DaoBase<ProductionDTO>{
+public class ProductionDao extends DaoBase<ProductionDTO> {
 
     public ProductionDao(Connection connection) {
         super(connection);
@@ -24,36 +24,37 @@ public class ProductionDao extends DaoBase<ProductionDTO>{
 
     @Override
     public boolean create(ProductionDTO dto) throws SQLException {
-        if(dto==null){
+        if (dto == null) {
             return false;
         }
-        String query = "Call ProductionCreate(?,?,?,?,?)";
-        try(PreparedStatement stmt = connection.prepareStatement(query)){
+        String query = "Call ProductionCreate(?,?,?,?,?,?)";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setInt(1, dto.getCrop());
             stmt.setDate(2, dto.getDate());
             stmt.setInt(3, dto.getAmount());
             stmt.setInt(4, dto.getAmount2());
             stmt.setString(5, dto.getDestiny());
+            stmt.setInt(6, 1);
             return stmt.executeUpdate() > 0;
         }
     }
 
     @Override
     public ProductionDTO read(Object id) throws SQLException {
-        if(id==null){
+        if (id == null) {
             return null;
         }
         String query = "Call ProductionRead(?)";
-        try(PreparedStatement stmt = connection.prepareStatement(query)){
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setInt(1, Integer.parseInt(String.valueOf(id)));
-            try(ResultSet rs = stmt.executeQuery()){
-                if(rs.next()){
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
                     return new ProductionDTO(
-                            rs.getInt(1), 
-                            rs.getInt(2), 
-                            rs.getDate(3), 
-                            rs.getInt(4), 
-                            rs.getInt(5), 
+                            rs.getInt(1),
+                            rs.getInt(2),
+                            rs.getDate(3),
+                            rs.getInt(4),
+                            rs.getInt(5),
                             rs.getString(6)
                     );
                 }
@@ -66,21 +67,21 @@ public class ProductionDao extends DaoBase<ProductionDTO>{
     public List<ProductionDTO> readAll() throws SQLException {
         String query = "Call ProductionReadAll()";
         ArrayList<ProductionDTO> list = new ArrayList();
-        try(PreparedStatement stmt = connection.prepareStatement(query)){
-            try(ResultSet rs = stmt.executeQuery()){
-                if(rs.next()){
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
                     list.add(new ProductionDTO(
-                            rs.getInt(1), 
-                            rs.getInt(2), 
-                            rs.getDate(3), 
-                            rs.getInt(4), 
-                            rs.getInt(5), 
+                            rs.getInt(1),
+                            rs.getInt(2),
+                            rs.getDate(3),
+                            rs.getInt(4),
+                            rs.getInt(5),
                             rs.getString(6)
-                    )) ;
+                    ));
                 }
             }
         }
         return list;
     }
-    
+
 }

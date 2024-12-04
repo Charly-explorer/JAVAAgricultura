@@ -7,6 +7,7 @@ import java.time.LocalDate;
  * @author carlo
  */
 public class Storerooms {
+
     private int id;
     private int idProduccion;
     private double idQuantity;
@@ -53,14 +54,14 @@ public class Storerooms {
         this.departureDate = departureDate;
         this.alert = alert;
     }
-      public Storerooms(int idProduccion, double idQuantity,  boolean alert) {
+
+    public Storerooms(int id, int idProduccion, double idQuantity) {
+        this.id = id;
         this.idProduccion = idProduccion;
         this.idQuantity = idQuantity;
         this.entryDate = LocalDate.now();
         this.departureDate = null;
-        this.alert = alert;
+        //this.alert = alert;
     }
-    
-    
-    
+
 }

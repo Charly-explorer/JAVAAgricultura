@@ -6,6 +6,7 @@ package Model.Storerooms;
 
 import Model.Mapper.Mapper;
 import java.sql.Date;
+import java.time.LocalDate;
 
 /**
  *
@@ -19,10 +20,15 @@ public class StoreroomsMapper implements Mapper<Storerooms,StoreroomsDTO> {
                 ent.getId(),
                 ent.getIdProduccion(), 
                 ent.getIdQuantity(), 
-                Date.valueOf(ent.getEntryDate()),
-                Date.valueOf(ent.getDepartureDate()),
+                validateDate(ent.getEntryDate()),
+                validateDate(ent.getDepartureDate()),
                 ent.isAlert()
         );
+    }
+    public Date validateDate(LocalDate date){
+        if(date == null)
+            return null;
+        return Date.valueOf(date);
     }
 
     @Override

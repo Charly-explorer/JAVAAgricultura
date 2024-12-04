@@ -95,6 +95,7 @@ public class FrmUsers extends javax.swing.JInternalFrame implements IView<Users>
         );
 
         setBackground(new java.awt.Color(234, 231, 203));
+        setClosable(true);
         setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel1.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
