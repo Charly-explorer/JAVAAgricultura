@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package View;
+import Controller.UsersController;
 import java.awt.Graphics;
 import javax.swing.ImageIcon;
 
@@ -11,30 +12,15 @@ import javax.swing.ImageIcon;
  * @author zulay
  */
 public class FrmLogin extends javax.swing.JFrame {
+    private UsersController controller;
 
     /**
      * Creates new form FrmLogin
      */
     public FrmLogin() {
         initComponents();
+        this.controller  = new UsersController((IView)this);
     }
-//    private void ajustarPosiciones() {
-//        int frameWidth = getWidth();
-//        int frameHeight = getHeight();
-//
-//        int x1 = (int) (frameWidth * 0.35);
-//        int y1 = (int) (frameHeight * 0.70);
-//
-//        int x2 = (int) (frameWidth * 0.55);
-//        int y2 = (int) (frameHeight * 0.70);
-//
-//        int xInfo = (int) (frameWidth * 0.87);
-//        int yInfo = (int) (frameHeight * 0.08);
-//
-//        btnInformacion.setLocation(xInfo, yInfo);
-//        btnInciar1vsBot.setLocation(x1, y1);
-//        btnInciar1vsv1.setLocation(x2, y2);
-//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -85,6 +71,11 @@ public class FrmLogin extends javax.swing.JFrame {
         btnLogin.setForeground(new java.awt.Color(0, 0, 0));
         btnLogin.setText("Iniciar Seccion");
         btnLogin.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
 
         jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -145,6 +136,10 @@ public class FrmLogin extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+      
+    }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
      * @param args the command line arguments
