@@ -17,7 +17,7 @@ public class UsersMapper implements Mapper<Users,UsersDTO> {
         return new UsersDTO(
                 ent.getId(),
                 ent.getName(),
-                ""
+                ent.getPassword()
         );
     }
 
@@ -26,7 +26,7 @@ public class UsersMapper implements Mapper<Users,UsersDTO> {
         return new Users(
                 dto.getId(), 
                 dto.getName(), 
-                ""
+                dto.getPassword()
         );
     }
     

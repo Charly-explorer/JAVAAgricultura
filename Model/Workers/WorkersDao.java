@@ -55,17 +55,21 @@ public class WorkersDao extends DaoAll<WorkersDTO> {
         }
         String query = "Call WorkersCreate(?,?,?,?,?,?,?,?,?)";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            
+            System.out.println(dto.getIdCard()); 
             stmt.setString(1, dto.getIdCard());
             stmt.setString(2, dto.getName());
             stmt.setString(3, dto.getLastName1());
             stmt.setString(4, dto.getLastName2());
             stmt.setString(5, dto.getTelephone());
             stmt.setString(6, dto.getEmail());
+//System.out.println(dto.getSalary());            
             stmt.setString(7, dto.getPosition());
-            stmt.setString(8, dto.getSchedule());
+            System.out.println(dto.getSchedule());
+            stmt.setString(8, dto.getSchedule());            
             stmt.setDouble(9, dto.getSalary());
            
-            
+        
             
             return stmt.executeUpdate() > 0;
         }
@@ -100,7 +104,7 @@ public class WorkersDao extends DaoAll<WorkersDTO> {
 
     @Override
     public List<WorkersDTO> readAll() throws SQLException {
-        String query = "Call WorkersReadAll()";
+        String query = "Select * from workers";
         List<WorkersDTO> list = new ArrayList<>();
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             try (ResultSet rs = stmt.executeQuery()) {

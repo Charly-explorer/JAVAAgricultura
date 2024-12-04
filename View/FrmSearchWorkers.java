@@ -43,11 +43,10 @@ public class FrmSearchWorkers extends javax.swing.JDialog {
                 new Object[]{
                         worker.getIdCard(),
                         worker.getName(),
-                        worker.getLastName1(),
-                        worker.getLastName2(),
-                        worker.getPosition(),
                         worker.getTelephone(),
                         worker.getEmail(),
+                        worker.getPosition(),
+                        worker.getSchedule(),
                         worker.getSalary()
                 }
         ));
@@ -85,9 +84,7 @@ public class FrmSearchWorkers extends javax.swing.JDialog {
 
         jScrollPane1.setBackground(new java.awt.Color(217, 246, 248));
 
-        tblWorkers.setBackground(new java.awt.Color(255, 255, 255));
         tblWorkers.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        tblWorkers.setForeground(new java.awt.Color(0, 0, 0));
         tblWorkers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -102,11 +99,11 @@ public class FrmSearchWorkers extends javax.swing.JDialog {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Identificacion", "Nombre", "Edad", "Telefono", "Correo", "Puesto ", "Salario"
+                "Identificacion", "Nombre", "Telefono", "Correo", "Puesto ", "Horario", "Salario"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false
@@ -125,15 +122,11 @@ public class FrmSearchWorkers extends javax.swing.JDialog {
         jScrollPane1.setViewportView(tblWorkers);
 
         jLabel1.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Tarjeta de Identificacion");
 
-        jTextField2.setBackground(new java.awt.Color(255, 255, 255));
         jTextField2.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jTextField2.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel2.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Busqueda de Trabajadores");
 
         jButton1.setText("jButton1");

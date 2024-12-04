@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
  * @author carlo
  */
 public class WorkerController {
+
     private WorkersDao workerDao;
     private final IView view;
     private final WorkersMapper mapper;
@@ -35,10 +36,11 @@ public class WorkerController {
             return;
         }
         try {
-            if (!validatePK(worker.getIdCard())) {
+            if (validatePK(worker.getIdCard())) {
                 view.showError("El ID del trabajador ya está ingresado");
                 return;
             }
+            System.out.println(worker.getIdCard());//------------------------------------
             workerDao.create(mapper.toDto(worker));
             view.showMessage("Datos guardados correctamente");
         } catch (SQLException ex) {
@@ -111,15 +113,15 @@ public class WorkerController {
     }
 
     public boolean validateWorker(Workers worker) {
-        return worker.getIdCard() != null && !worker.getIdCard().trim().isEmpty() &&
-               worker.getName() != null && !worker.getName().trim().isEmpty() &&
-               worker.getLastName1() != null && !worker.getLastName1().trim().isEmpty() &&
-               worker.getLastName2() != null && !worker.getLastName2().trim().isEmpty() &&
-               worker.getTelephone() != null && worker.validarTelefono(worker.getTelephone()) &&
-               worker.getEmail() != null && worker.validarCorreo(worker.getEmail()) &&
-               worker.getPosition() != null && !worker.getPosition().trim().isEmpty() &&
-               worker.getSchedule() != null && !worker.getSchedule().trim().isEmpty() &&
-               worker.getSalary() > 0;
+        return worker.getIdCard() != null && !worker.getIdCard().trim().isEmpty()
+                && worker.getName() != null && !worker.getName().trim().isEmpty()
+                && worker.getLastName1() != null && !worker.getLastName1().trim().isEmpty()
+                && worker.getLastName2() != null && !worker.getLastName2().trim().isEmpty()
+                && worker.getTelephone() != null && worker.validarTelefono(worker.getTelephone())
+                && worker.getEmail() != null && worker.validarCorreo(worker.getEmail())
+                && worker.getPosition() != null && !worker.getPosition().trim().isEmpty()
+                && worker.getSchedule() != null && !worker.getSchedule().trim().isEmpty()
+                && worker.getSalary() > 0;
     }
 
     public boolean validatePK(String idCard) {
@@ -130,4 +132,3 @@ public class WorkerController {
         }
     }
 }
-

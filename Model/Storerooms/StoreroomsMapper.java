@@ -16,6 +16,7 @@ public class StoreroomsMapper implements Mapper<Storerooms,StoreroomsDTO> {
     @Override
     public StoreroomsDTO toDto(Storerooms ent) {
         return new StoreroomsDTO(
+                ent.getId(),
                 ent.getIdProduccion(), 
                 ent.getIdQuantity(), 
                 Date.valueOf(ent.getEntryDate()),

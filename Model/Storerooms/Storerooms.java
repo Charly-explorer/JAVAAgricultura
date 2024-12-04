@@ -7,11 +7,16 @@ import java.time.LocalDate;
  * @author carlo
  */
 public class Storerooms {
+    private int id;
     private int idProduccion;
     private double idQuantity;
     private LocalDate entryDate;
     private LocalDate departureDate;
     private boolean alert;
+
+    public int getId() {
+        return id;
+    }
 
     public int getIdProduccion() {
         return idProduccion;

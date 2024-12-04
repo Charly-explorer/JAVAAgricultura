@@ -94,6 +94,22 @@ public class UsersController {
             view.showError("Ocurrio un error al actualizar los datos: "+ ex.getMessage());
         }
     }   
+    
+    public void delete(Users user){
+        if(user==null || !validateUser(user)) {
+            view.showError("No hay ningun usuario cargado actualmente");
+            return;
+        }
+        try {
+            if (validatePK(user.getId())){
+                view.showError("El ID del usuario no está en la Base de Datos");
+                return;
+            }
+            userDao.delete(user.getId());
+        } catch (SQLException ex) {
+            view.showError("Ocurrio un error al eliminar los datos: "+ ex.getMessage());
+        }
+    }
 
     public boolean validateUser(Users user) {
         return !user.getName().trim().isEmpty()
