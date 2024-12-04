@@ -11,7 +11,7 @@ import javax.swing.ImageIcon;
  */
 public class FrmMenu extends javax.swing.JFrame {
  private FrmCrops frmCrop;   
- private FrmWorkers frmworkers;
+ private FrmWork frmworkers;
  private FrmUsers frmUser;
  private FrmStroge frmStroge;  
  private FrmProduction frmPro;
@@ -22,7 +22,7 @@ public class FrmMenu extends javax.swing.JFrame {
     public FrmMenu() {
         initComponents();
         frmCrop = new FrmCrops();  
-        frmworkers = new FrmWorkers();  
+        frmworkers = new FrmWork();  
         frmUser = new FrmUsers();
         frmStroge = new FrmStroge();
         frmPro = new FrmProduction();

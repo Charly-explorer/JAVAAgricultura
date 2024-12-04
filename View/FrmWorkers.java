@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
+ */
 package View;
 
 import Controller.WorkerController;
@@ -10,10 +14,11 @@ import javax.swing.JOptionPane;
  *
  * @author zulay
  */
-public class FrmWorkers extends javax.swing.JInternalFrame implements IView<Workers>{
+public class FrmWorkers extends javax.swing.JInternalFrame implements IView<Workers> {
     WorkerController controller;
     Workers worker;
     FrmSearchWorkers frmSearch;
+
     /**
      * Creates new form FrmWorkers
      */
@@ -21,6 +26,42 @@ public class FrmWorkers extends javax.swing.JInternalFrame implements IView<Work
         initComponents();
         controller = new WorkerController(this);
     }
+
+    @Override
+    public void showAll(List<Workers> ents) {
+    if (frmSearch == null) {
+            frmSearch = new FrmSearchWorkers(null, true);
+            frmSearch.setFrmWorkers(this);
+        }
+        frmSearch.setEnts(ents);
+        frmSearch.setVisible(true);    }
+
+    @Override
+    public void showMessage(String msg) {
+        JOptionPane.showMessageDialog(this, msg, "Información", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    @Override
+    public void showError(String err) {
+         JOptionPane.showMessageDialog(this, err, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    @Override
+    public boolean validateRequired() {
+return UtilGui.validateFields(txtIdCard, txtName, txtLastName1, txtLastName2, txtTelephone, txtEmail, txtPosition,  txtSalary);
+    }
+     private void clear() {
+        UtilGui.clearTxts(
+                txtIdCard,
+                txtName,
+                txtLastName1,
+                txtLastName2,
+                txtTelephone,
+                txtEmail,
+                txtPosition,
+                txtSalary
+        );    }
+    
     @Override
     public void show(Workers ent) {
         worker = ent;
@@ -37,46 +78,6 @@ public class FrmWorkers extends javax.swing.JInternalFrame implements IView<Work
         txtPosition.setText(ent.getPosition());
         txtSalary.setText(String.valueOf(ent.getSalary()));
     }
-
-    @Override
-    public void showAll(List<Workers> ents) {
-        if (frmSearch == null) {
-            frmSearch = new FrmSearchWorkers(null, true);
-            frmSearch.setFrmWorkers(this);
-        }
-        frmSearch.setEnts(ents);
-        frmSearch.setVisible(true);
-    }
-
-    @Override
-    public void showMessage(String msg) {
-        JOptionPane.showMessageDialog(this, msg, "Información", JOptionPane.INFORMATION_MESSAGE);
-    
-    }
-    
-
-    @Override
-    public void showError(String err) {
-         JOptionPane.showMessageDialog(this, err, "Error", JOptionPane.ERROR_MESSAGE);
-    }
-
-    @Override
-    public boolean validateRequired() {
-        return UtilGui.validateFields(txtIdCard, txtName, txtLastName1, txtLastName2, txtTelephone, txtEmail, txtPosition,  txtSalary);
-    }
-     private void clear() {
-        UtilGui.clearTxts(
-                txtIdCard,
-                txtName,
-                txtLastName1,
-                txtLastName2,
-                txtTelephone,
-                txtEmail,
-                txtPosition,
-                txtSalary
-        );
-    }
-
     private void setEditableStateTxts(boolean value) {
         txtIdCard.setEditable(value);
         txtName.setEditable(value);
@@ -97,6 +98,7 @@ public class FrmWorkers extends javax.swing.JInternalFrame implements IView<Work
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextField6 = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -107,104 +109,67 @@ public class FrmWorkers extends javax.swing.JInternalFrame implements IView<Work
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        txtId = new javax.swing.JTextField();
         txtIdCard = new javax.swing.JTextField();
         txtName = new javax.swing.JTextField();
         txtLastName1 = new javax.swing.JTextField();
+        txtLastName2 = new javax.swing.JTextField();
         txtTelephone = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
         txtPosition = new javax.swing.JTextField();
         txtSalary = new javax.swing.JTextField();
-        txtLastName2 = new javax.swing.JTextField();
-        btnSave = new javax.swing.JButton();
         txtSchedule = new javax.swing.JTextField();
-        Horario = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
-        jLabel1.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Trabajadores");
+        jTextField6.setText("jTextField6");
 
-        jLabel2.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Tarjeta de Identificación");
+        setClosable(true);
 
-        jLabel3.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Id");
+
+        jLabel2.setText("Tarjeta de identificacion");
+
         jLabel3.setText("Nombre");
 
-        jLabel4.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Primer Apellido");
+        jLabel4.setText("Primer Apellido ");
 
-        jLabel5.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Segundo Apellido");
 
-        jLabel6.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Telefono");
 
-        jLabel7.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Email");
 
-        jLabel8.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Puesto");
 
-        jLabel9.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Salario");
 
-        txtIdCard.setBackground(new java.awt.Color(255, 255, 255));
-        txtIdCard.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        txtIdCard.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel10.setText("Horario");
 
-        txtName.setBackground(new java.awt.Color(255, 255, 255));
-        txtName.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        txtName.setForeground(new java.awt.Color(0, 0, 0));
+        txtIdCard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdCardActionPerformed(evt);
+            }
+        });
 
-        txtLastName1.setBackground(new java.awt.Color(255, 255, 255));
-        txtLastName1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        txtLastName1.setForeground(new java.awt.Color(0, 0, 0));
+        txtLastName1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtLastName1ActionPerformed(evt);
+            }
+        });
 
-        txtTelephone.setBackground(new java.awt.Color(255, 255, 255));
-        txtTelephone.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        txtTelephone.setForeground(new java.awt.Color(0, 0, 0));
-
-        txtEmail.setBackground(new java.awt.Color(255, 255, 255));
-        txtEmail.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        txtEmail.setForeground(new java.awt.Color(0, 0, 0));
-
-        txtPosition.setBackground(new java.awt.Color(255, 255, 255));
-        txtPosition.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        txtPosition.setForeground(new java.awt.Color(0, 0, 0));
-
-        txtSalary.setBackground(new java.awt.Color(255, 255, 255));
-        txtSalary.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        txtSalary.setForeground(new java.awt.Color(0, 0, 0));
-
-        txtLastName2.setBackground(new java.awt.Color(255, 255, 255));
-        txtLastName2.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        txtLastName2.setForeground(new java.awt.Color(0, 0, 0));
-
-        btnSave.setText("Guardar");
+        btnSave.setText("Guaradar");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveActionPerformed(evt);
             }
         });
 
-        txtSchedule.setBackground(new java.awt.Color(255, 255, 255));
-        txtSchedule.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        txtSchedule.setForeground(new java.awt.Color(0, 0, 0));
-
-        Horario.setText("Horario");
-
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setText("Buscar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -214,86 +179,92 @@ public class FrmWorkers extends javax.swing.JInternalFrame implements IView<Work
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(23, 23, 23)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel1)
+                                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel10)
+                                .addComponent(txtSchedule, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel4)
+                                .addComponent(txtLastName1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel6)
+                                .addComponent(txtTelephone, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel8)
+                                .addComponent(txtPosition, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(29, 29, 29)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel2)
+                                .addComponent(txtIdCard, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel7)
+                                .addComponent(jLabel9)
+                                .addComponent(txtLastName2)
+                                .addComponent(txtEmail)
+                                .addComponent(txtSalary))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtTelephone, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtIdCard, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel8)
-                                    .addComponent(txtPosition, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtLastName1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(btnSave)
-                                        .addGap(78, 78, 78)
-                                        .addComponent(jButton1))
-                                    .addComponent(txtSchedule, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Horario))
-                                .addGap(52, 52, 52)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtLastName2, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel5)
-                                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(txtName)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(250, 250, 250)
-                        .addComponent(jLabel1)))
-                .addContainerGap(30, Short.MAX_VALUE))
+                        .addGap(177, 177, 177)
+                        .addComponent(btnSave)
+                        .addGap(107, 107, 107)
+                        .addComponent(jButton2)))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(33, 33, 33)
-                .addComponent(jLabel2)
+                .addGap(30, 30, 30)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtIdCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtIdCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtLastName1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtLastName2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTelephone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPosition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSalary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Horario)
-                .addGap(8, 8, 8)
-                .addComponent(txtSchedule, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSave)
-                    .addComponent(jButton1))
-                .addGap(38, 38, 38))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtLastName1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtTelephone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtPosition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtLastName2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtSalary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(27, 27, 27)
+                .addComponent(jLabel10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtSchedule, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(113, 113, 113)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnSave)
+                            .addComponent(jButton2))))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -305,15 +276,24 @@ public class FrmWorkers extends javax.swing.JInternalFrame implements IView<Work
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtIdCardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdCardActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdCardActionPerformed
+
+    private void txtLastName1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLastName1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtLastName1ActionPerformed
+
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        if (!validateRequired()) { // Valida que todos los campos requeridos estén llenos
+if (!validateRequired()) { // Valida que todos los campos requeridos estén llenos
         showError("Todos los campos son obligatorios. Por favor, complete los datos.");
         return;
     }
@@ -355,19 +335,18 @@ public class FrmWorkers extends javax.swing.JInternalFrame implements IView<Work
         clear(); // Limpia los campos después de guardar
     } catch (Exception ex) {
         showError("Ocurrió un error al intentar guardar los datos: " + ex.getMessage());
-    }
-    }//GEN-LAST:event_btnSaveActionPerformed
+    }    }//GEN-LAST:event_btnSaveActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
        controller.readAll();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Horario;
     private javax.swing.JButton btnSave;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -377,7 +356,9 @@ public class FrmWorkers extends javax.swing.JInternalFrame implements IView<Work
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtIdCard;
     private javax.swing.JTextField txtLastName1;
     private javax.swing.JTextField txtLastName2;
@@ -387,6 +368,4 @@ public class FrmWorkers extends javax.swing.JInternalFrame implements IView<Work
     private javax.swing.JTextField txtSchedule;
     private javax.swing.JTextField txtTelephone;
     // End of variables declaration//GEN-END:variables
-
-    
 }
