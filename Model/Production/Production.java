@@ -51,6 +51,7 @@ public class Production {
 
     public void setQuality(int amount2) {
         this.amount2 = amount2;
+        this.percentProduction = calculatePercentProduction();
     }
 
     public void setDestiny(String destiny) {
@@ -62,8 +63,8 @@ public class Production {
         this.crop = crop;
         this.date = date;
         this.amount = amount;
-        this.percentProduction = calculatePercentProduction();
         this.amount2 = amount2;
+        this.percentProduction = calculatePercentProduction();
         this.destiny = destiny;
     }
     
@@ -72,12 +73,12 @@ public class Production {
         this.crop = crop;
         this.date = LocalDate.now();
         this.amount = amount;
-        this.percentProduction = calculatePercentProduction();
         this.amount2 = amount2;
+        this.percentProduction = calculatePercentProduction();
         this.destiny = destiny;
     } 
     
     protected double calculatePercentProduction(){
-        return this.percentProduction = (amount/300)*100;
+        return this.percentProduction = (amount/100)*amount2;
     }
 }
