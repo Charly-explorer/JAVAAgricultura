@@ -13,6 +13,8 @@ import java.util.ArrayList;
  * @author carlo
  */
 public class WorkersDao extends DaoAll<WorkersDTO> {
+    
+    private static int cont = 3;
 
     public WorkersDao(Connection connection) {
         super(connection);
@@ -53,21 +55,21 @@ public class WorkersDao extends DaoAll<WorkersDTO> {
         if (dto == null || !validatePk(dto.getIdCard())) {
             return false;
         }
-        String query = "Call WorkersCreate(?,?,?,?,?,?,?,?,?)";
+        String query = "Call WorkersCreate(?,?,?,?,?,?,?,?,?,?)";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             
-            System.out.println(dto.getIdCard()); 
-            stmt.setString(1, dto.getIdCard());
+
+            stmt.setInt(1, dto.getId());
             stmt.setString(2, dto.getName());
             stmt.setString(3, dto.getLastName1());
             stmt.setString(4, dto.getLastName2());
             stmt.setString(5, dto.getTelephone());
-            stmt.setString(6, dto.getEmail());
-//System.out.println(dto.getSalary());            
+            stmt.setString(6, dto.getEmail());     
             stmt.setString(7, dto.getPosition());
-            System.out.println(dto.getSchedule());
             stmt.setString(8, dto.getSchedule());            
             stmt.setDouble(9, dto.getSalary());
+            stmt.setString(10, dto.getIdCard());
+            
            
         
             

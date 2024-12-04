@@ -63,26 +63,20 @@ public class FrmLogin extends javax.swing.JFrame {
         jDesktopPane1.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel1.setFont(new java.awt.Font("Candara", 1, 22)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Bienvenidos a UTN Agriculture");
 
         jLabel2.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Usuario");
 
-        txtUser.setBackground(new java.awt.Color(255, 255, 255));
         txtUser.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Contraseña");
 
-        txtPasword.setBackground(new java.awt.Color(255, 255, 255));
         txtPasword.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
         btnLogin.setBackground(new java.awt.Color(12, 84, 12));
         btnLogin.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
-        btnLogin.setForeground(new java.awt.Color(0, 0, 0));
         btnLogin.setText("Iniciar Seccion");
         btnLogin.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
@@ -108,11 +102,12 @@ public class FrmLogin extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addComponent(txtUser)
-                            .addComponent(txtPasword, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(373, 373, 373)
-                        .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtPasword, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(255, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(341, 341, 341))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,9 +122,9 @@ public class FrmLogin extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtPasword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(105, 105, 105)
+                .addGap(98, 98, 98)
                 .addComponent(btnLogin)
-                .addContainerGap(140, Short.MAX_VALUE))
+                .addContainerGap(147, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
