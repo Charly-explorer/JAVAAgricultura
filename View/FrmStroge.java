@@ -32,6 +32,7 @@ public class FrmStroge extends javax.swing.JInternalFrame implements IView<Store
     public FrmStroge() {
         initComponents();
         controller = new StorageController(this);
+        formatDate(LocalDate.now(), txtEntryDate);
     }
     
     public void setFrmProduction(FrmProduction frmProduction){
@@ -47,6 +48,8 @@ public class FrmStroge extends javax.swing.JInternalFrame implements IView<Store
         }
         txtIdProduction.setText(String.valueOf(ent.getIdProduccion()));
         txtIdAmount.setText(String.valueOf(ent.getIdQuantity()));
+        formatDate(ent.getEntryDate(), txtEntryDate);
+        formatDate(ent.getDepartureDate(), txtDepartureDate);
     }
 
     @Override
@@ -87,6 +90,8 @@ public class FrmStroge extends javax.swing.JInternalFrame implements IView<Store
                 txtIdProduction,
                 txtIdAmount
         );
+        formatDate(LocalDate.now(), txtEntryDate);
+        txtDepartureDate.setText("");
     }
 
     /**
@@ -105,7 +110,13 @@ public class FrmStroge extends javax.swing.JInternalFrame implements IView<Store
         txtIdProduction = new javax.swing.JTextField();
         txtIdAmount = new javax.swing.JTextField();
         btnAgregar = new javax.swing.JButton();
-        txtSearch = new javax.swing.JButton();
+        btnSearch = new javax.swing.JButton();
+        txtEntryDate = new javax.swing.JFormattedTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txtDepartureDate = new javax.swing.JFormattedTextField();
+        btnUpdate = new javax.swing.JButton();
+        txtClear = new javax.swing.JButton();
 
         setClosable(true);
 
@@ -116,7 +127,7 @@ public class FrmStroge extends javax.swing.JInternalFrame implements IView<Store
         jLabel2.setText("Id Produccion");
 
         jLabel3.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
-        jLabel3.setText("Id Cantidad");
+        jLabel3.setText("Cantidad");
 
         txtIdProduction.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         txtIdProduction.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -124,12 +135,8 @@ public class FrmStroge extends javax.swing.JInternalFrame implements IView<Store
                 txtIdProductionMouseClicked(evt);
             }
         });
-        txtIdProduction.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtIdProductionKeyTyped(evt);
-            }
-        });
 
+        txtIdAmount.setEditable(false);
         txtIdAmount.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
 
         btnAgregar.setText("Agregar");
@@ -139,10 +146,37 @@ public class FrmStroge extends javax.swing.JInternalFrame implements IView<Store
             }
         });
 
-        txtSearch.setText("Buscar");
-        txtSearch.addActionListener(new java.awt.event.ActionListener() {
+        btnSearch.setText("Buscar");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSearchActionPerformed(evt);
+                btnSearchActionPerformed(evt);
+            }
+        });
+
+        txtEntryDate.setEditable(false);
+        txtEntryDate.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
+
+        jLabel4.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        jLabel4.setText("Fecha de entrada");
+
+        jLabel5.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        jLabel5.setText("Fecha de salida");
+
+        txtDepartureDate.setEditable(false);
+        txtDepartureDate.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
+
+        btnUpdate.setText("Despachar");
+        btnUpdate.setEnabled(false);
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
+        txtClear.setText("Nuevo");
+        txtClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtClearActionPerformed(evt);
             }
         });
 
@@ -151,31 +185,41 @@ public class FrmStroge extends javax.swing.JInternalFrame implements IView<Store
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtIdProduction, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jLabel3)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(205, 205, 205)
-                                .addComponent(jLabel1))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(131, 131, 131)
-                                .addComponent(btnAgregar)
-                                .addGap(113, 113, 113)
-                                .addComponent(txtSearch))))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(205, 205, 205)
+                            .addComponent(jLabel1)
+                            .addGap(42, 42, 42)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(300, 300, 300)
-                        .addComponent(txtIdAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnSearch)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnUpdate))
+                            .addComponent(jLabel5)
+                            .addComponent(txtIdAmount, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+                            .addComponent(txtDepartureDate))))
                 .addGap(0, 40, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtClear)
+                                .addGap(67, 67, 67)
+                                .addComponent(btnAgregar))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtIdProduction, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+                                .addComponent(jLabel4)
+                                .addComponent(txtEntryDate)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,11 +234,21 @@ public class FrmStroge extends javax.swing.JInternalFrame implements IView<Store
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtIdProduction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtIdAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 268, Short.MAX_VALUE)
+                .addGap(63, 63, 63)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtEntryDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDepartureDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(71, 71, 71)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregar)
-                    .addComponent(txtSearch))
-                .addGap(87, 87, 87))
+                    .addComponent(btnSearch)
+                    .addComponent(btnUpdate)
+                    .addComponent(txtClear))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -224,30 +278,44 @@ public class FrmStroge extends javax.swing.JInternalFrame implements IView<Store
         controller.create(storage);
     }//GEN-LAST:event_btnAgregarActionPerformed
 
-    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         controller.readAll();
-    }//GEN-LAST:event_txtSearchActionPerformed
+        btnUpdate.setEnabled(true);
+    }//GEN-LAST:event_btnSearchActionPerformed
 
     private void txtIdProductionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtIdProductionMouseClicked
-//        frmProduction.controller.readAll();
-//        production = frmProduction.getProduction();
-//        txtIdProduction.setText(String.valueOf(production.getId()));
-//        txtIdAmount.setText(String.valueOf(production.getAmount2()));
+        frmProduction.controller.readAll();
+        production = frmProduction.getProduction();
+        txtIdProduction.setText(String.valueOf(production.getId()));
+        txtIdAmount.setText(String.valueOf(production.getAmount2()));
     }//GEN-LAST:event_txtIdProductionMouseClicked
 
-    private void txtIdProductionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdProductionKeyTyped
-              
-    }//GEN-LAST:event_txtIdProductionKeyTyped
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        storage.setDepartureDate(LocalDate.now());
+        formatDate(storage.getDepartureDate(), txtDepartureDate);
+        controller.update(storage);
+        btnUpdate.setEnabled(false);
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void txtClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClearActionPerformed
+        clear();
+    }//GEN-LAST:event_txtClearActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton txtClear;
+    private javax.swing.JFormattedTextField txtDepartureDate;
+    private javax.swing.JFormattedTextField txtEntryDate;
     private javax.swing.JTextField txtIdAmount;
     private javax.swing.JTextField txtIdProduction;
-    private javax.swing.JButton txtSearch;
     // End of variables declaration//GEN-END:variables
 }

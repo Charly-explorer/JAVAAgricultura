@@ -44,7 +44,20 @@ public class Storerooms {
     }
 
     public void setDepartureDate(LocalDate departureDate) {
+        if (departureDate != null && (departureDate.isEqual(entryDate) || departureDate.isAfter(entryDate))) {
+            this.departureDate = departureDate;
+        } else {
+            throw new IllegalArgumentException("La fecha de despacho debe ser posterior a la fecha de entrada");
+        }
+    }
+
+    public Storerooms(int id, int idProduccion, double idQuantity, LocalDate entryDate, LocalDate departureDate, boolean alert) {
+        this.id = id;
+        this.idProduccion = idProduccion;
+        this.idQuantity = idQuantity;
+        this.entryDate = entryDate;
         this.departureDate = departureDate;
+        this.alert = alert;
     }
 
     public Storerooms(int idProduccion, double idQuantity, LocalDate entryDate, LocalDate departureDate, boolean alert) {
@@ -61,7 +74,7 @@ public class Storerooms {
         this.idQuantity = idQuantity;
         this.entryDate = LocalDate.now();
         this.departureDate = null;
-        //this.alert = alert;
+        this.alert = false;
     }
 
 }

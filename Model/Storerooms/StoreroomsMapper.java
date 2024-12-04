@@ -37,12 +37,18 @@ public class StoreroomsMapper implements Mapper<Storerooms,StoreroomsDTO> {
         Date DepartureDate = dto.getDepartureDate();
         
         return new Storerooms(
+                dto.getId(),
                 dto.getIdProduccion(), 
                 dto.getIdQuantity(), 
                 EntryDate.toLocalDate(),
-               DepartureDate.toLocalDate(),
+               validateDate(DepartureDate),
                 dto.isAlert()
         );
     }
     
+    public LocalDate validateDate(Date date){
+        if(date == null)
+            return null;
+        return date.toLocalDate();
+    }
 }
