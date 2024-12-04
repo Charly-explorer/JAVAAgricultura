@@ -229,14 +229,32 @@ public class FrmCrops extends javax.swing.JInternalFrame implements IView<Crop>{
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtNameKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNameKeyTyped(evt);
+            }
         });
 
         txtType.setBackground(new java.awt.Color(255, 255, 255));
         txtType.setForeground(new java.awt.Color(0, 0, 0));
+        txtType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTypeActionPerformed(evt);
+            }
+        });
+        txtType.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTypeKeyTyped(evt);
+            }
+        });
 
         txtArea.setBackground(new java.awt.Color(255, 255, 255));
         txtArea.setForeground(new java.awt.Color(0, 0, 0));
         txtArea.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtArea.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtAreaKeyTyped(evt);
+            }
+        });
 
         txtSowing.setEditable(false);
         txtSowing.setBackground(new java.awt.Color(255, 255, 255));
@@ -444,11 +462,11 @@ public class FrmCrops extends javax.swing.JInternalFrame implements IView<Crop>{
                 .addComponent(txtState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnSearch)
+                    .addComponent(btnDelete)
+                    .addComponent(btnLostCrop)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnSave)
-                        .addComponent(btnSearch)
-                        .addComponent(btnDelete)
-                        .addComponent(btnLostCrop)
                         .addComponent(btnClear))
                     .addComponent(btnChangeState))
                 .addGap(15, 15, 15))
@@ -536,6 +554,33 @@ public class FrmCrops extends javax.swing.JInternalFrame implements IView<Crop>{
     private void txtSowingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSowingActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSowingActionPerformed
+
+    private void txtNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameKeyTyped
+        char c = evt.getKeyChar();
+        if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z')) {
+            evt.consume();
+        }
+
+    }//GEN-LAST:event_txtNameKeyTyped
+
+    private void txtTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTypeActionPerformed
+
+    private void txtTypeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTypeKeyTyped
+        char c = evt.getKeyChar();
+        if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z')) {
+            evt.consume();
+        }
+
+    }//GEN-LAST:event_txtTypeKeyTyped
+
+    private void txtAreaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAreaKeyTyped
+        char c = evt.getKeyChar();
+        if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z')) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtAreaKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
