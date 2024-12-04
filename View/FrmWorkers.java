@@ -79,16 +79,22 @@ return UtilGui.validateFields(txtIdCard, txtName, txtLastName1, txtLastName2, tx
         txtEmail.setText(ent.getEmail());
         txtPosition.setText(ent.getPosition());
         txtSalary.setText(String.valueOf(ent.getSalary()));
+        txtSchedule.setText(String.valueOf(ent.getSchedule()));
     }
     private void setEditableStateTxts(boolean value) {
-        txtIdCard.setEditable(value);
-        txtName.setEditable(value);
-        txtLastName1.setEditable(value);
-        txtLastName2.setEditable(value);
+        txtSchedule.setEditable(value);
         txtTelephone.setEditable(value);
         txtEmail.setEditable(value);
         txtPosition.setEditable(value);
         txtSalary.setEditable(value);
+    }
+    
+    public void updateWorker() {
+        worker.setTelephone(txtTelephone.getText());
+        worker.setEmail(txtEmail.getText());
+        worker.setPosition(txtPosition.getText());
+        worker.setSalary(Double.parseDouble(txtSalary.getText()));
+        worker.setSchedule(txtSchedule.getText());
     }
 
     /**
@@ -150,18 +156,6 @@ return UtilGui.validateFields(txtIdCard, txtName, txtLastName1, txtLastName2, tx
         jLabel9.setText("Salario");
 
         jLabel10.setText("Horario");
-
-        txtIdCard.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIdCardActionPerformed(evt);
-            }
-        });
-
-        txtLastName1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtLastName1ActionPerformed(evt);
-            }
-        });
 
         btnSave.setText("Guaradar");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
@@ -310,14 +304,6 @@ return UtilGui.validateFields(txtIdCard, txtName, txtLastName1, txtLastName2, tx
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtIdCardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdCardActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtIdCardActionPerformed
-
-    private void txtLastName1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLastName1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtLastName1ActionPerformed
-
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         if (!validateRequired()) { // Valida que todos los campos requeridos estén llenos
             showError("Todos los campos son obligatorios. Por favor, complete los datos.");
@@ -385,7 +371,8 @@ return UtilGui.validateFields(txtIdCard, txtName, txtLastName1, txtLastName2, tx
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnUpDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpDateActionPerformed
-   
+        updateWorker();
+        controller.update(worker);
     }//GEN-LAST:event_btnUpDateActionPerformed
 
 

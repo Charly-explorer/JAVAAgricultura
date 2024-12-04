@@ -208,6 +208,7 @@ public class FrmMenu extends javax.swing.JFrame {
        frmStroge.setLocation((this.deskTop.getWidth()-frmStroge.getWidth())/2, 
                 (this.deskTop.getHeight()-frmworkers.getHeight())/2);
         frmStroge.setVisible(true);
+        frmStroge.setFrmProduction(frmPro);
     }//GEN-LAST:event_btnStrogeActionPerformed
 
     private void btnProductionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductionActionPerformed

@@ -219,16 +219,10 @@
         <Component class="javax.swing.JTextField" name="txtId">
         </Component>
         <Component class="javax.swing.JTextField" name="txtIdCard">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtIdCardActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtName">
         </Component>
         <Component class="javax.swing.JTextField" name="txtLastName1">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtLastName1ActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtLastName2">
         </Component>
